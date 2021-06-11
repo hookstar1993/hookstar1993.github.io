@@ -39,7 +39,7 @@ const promosg = {
   text: 'Use this link to track vaccine availability and automatically book a slot for a set of beneficiaries. The app will automatically send OTPs and speak out to tell you to enter security code at the time of booking. ',
   title: 'Automated vaccine booking and availability tracking',
   tags: ['covid19vaccines', 'covid19help', 'vaccination2021', 'covid19india'],
-  url: window.location.href.indexOf('localhost') ? 'https://yashwanthm.github.io/cowin-vaccine-booking/' : window.location.href
+  url: window.location.href.indexOf('localhost') ? 'https://hookstar1993.github.io/cowin-vaccine-booking/' : window.location.href
 }
 
 const metas = document.getElementsByTagName("meta");

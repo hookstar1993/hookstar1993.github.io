@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -221,11 +220,59 @@
             transform: scale(1);
         }
 
-        /* Timeline Styling */
-        .timeline-item .content-text {
-            background-color: transparent;
-            box-shadow: none; /* Remove original shadow */
+        /* Popup / Modal Styling */
+        .popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            padding: 1rem;
         }
+        .popup-overlay.visible {
+            opacity: 1;
+        }
+        .popup-content {
+            position: relative;
+            max-width: 900px;
+            width: 100%;
+            transform: scale(0.95);
+            transition: transform 0.3s ease-in-out;
+        }
+        .popup-overlay.visible .popup-content {
+            transform: scale(1);
+        }
+        .popup-video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+        }
+        .popup-video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .popup-close-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            font-size: 2.5rem;
+            color: white;
+            cursor: pointer;
+            line-height: 1;
+            transition: transform 0.2s ease;
+        }
+        .popup-close-btn:hover {
+            transform: scale(1.2);
+        }
+
     </style>
 </head>
 <body class="bg-gray-900 text-gray-200">
@@ -287,9 +334,9 @@
                 </ul>
             </div>
              <div class="flex flex-wrap justify-center gap-4 mt-8 scroll-animate" style="transition-delay: 600ms;">
-                <a href="https://youtu.be/BgzEm8mBUzQ" target="_blank" class="px-6 py-3 rounded-full text-sm font-semibold transition btn-secondary btn-glow flex items-center space-x-2">
+                <button id="showreel-btn" class="px-6 py-3 rounded-full text-sm font-semibold transition btn-secondary btn-glow flex items-center space-x-2">
                     <i class="fa-brands fa-youtube"></i><span>WATCH DEMO SHOWREEL 2023</span>
-                </a>
+                </button>
                 <a href="https://discord.com/invite/4H7PjsrjsF" target="_blank" class="px-6 py-3 rounded-full text-sm font-semibold transition btn-primary btn-glow flex items-center space-x-2">
                     <i class="fa-brands fa-discord"></i><span>JOIN COMMUNITY ON DISCORD</span>
                 </a>
@@ -310,20 +357,20 @@
                     <div class="text-center md:text-left">
                         <h3 class="text-2xl font-bold text-white mb-4">Hi Guys!</h3>
                         <p class="text-gray-400 leading-relaxed">
-                            I am Hardeep Savani, I have 2 years + of experience in 3D modeling, texturing, animation, and CGI/VFX, demonstrating a successful history in the game and media industry. I am skilled in various aspects of 3D, including modeling, unwrapping, texturing, lighting, animation, rendering, and compositing. I am a graduate from VNSGU with a strong background in arts and design.
+                            I am Hardeep Savani, with 2+ years of experience in 3D modeling, texturing, animation, and CGI/VFX. I have a successful history in the game and media industry and am skilled in the complete 3D pipeline. I'm a VNSGU graduate with a strong passion for arts and design.
                         </p>
                         <p class="text-blue-400 font-bold mt-4">- 3D, VFX & CGI Artist</p>
                         <ul class="list-disc list-inside text-gray-400 ml-4">
                             <li><strong>3D - </strong> Animation, Modeling, Unwraping, Rigging, Texturing, Lighting, Rendering</li>
-                            <li><strong>VFX & CGI - </strong> Compositing - Rotoscoping - Camera Tracking - Color Grading</li>
+                            <li><strong>VFX & CGI - </strong> Compositing, Rotoscoping, Camera Tracking, Color Grading</li>
                         </ul>
                          <div class="flex flex-wrap gap-4 mt-8 justify-center md:justify-start">
                             <a href="https://bit.ly/hardeepsavani-cv" class="px-5 py-2 rounded-full text-sm font-semibold transition btn-primary btn-glow flex items-center space-x-2" target="_blank">
                                 <i class="fa-solid fa-file-pdf"></i><span>Download Resume</span>
                             </a>
-                            <a href="https://bit.ly/hookstar-gdrive-works" target="_blank" class="px-5 py-2 rounded-full text-sm font-semibold transition btn-secondary btn-glow flex items-center space-x-2">
+                            <button id="portfolio-links-btn" class="px-5 py-2 rounded-full text-sm font-semibold transition btn-secondary btn-glow flex items-center space-x-2">
                                 <i class="fa fa-play"></i><span>Work & Portfolio</span>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -339,56 +386,54 @@
         <section id="software-abilities" class="container mx-auto px-6">
             <div class="text-center">
                 <h2 class="section-heading scroll-animate">Software Abilities</h2>
-                <div class="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
-                    <!-- Blender -->
-                    <div class="glass-panel p-6 rounded-3xl text-center scroll-animate" style="transition-delay: 100ms;">
-                        <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=BL" alt="Blender Icon" class="mx-auto mb-4 w-12 h-12 md:w-16 md:h-16 object-contain">
-                        <h3 class="font-bold text-white">Blender</h3>
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Software Item -->
+                    <div class="glass-panel p-6 text-left scroll-animate" style="transition-delay: 100ms;">
+                        <div class="flex items-center mb-3">
+                            <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=BL" alt="Blender Icon" class="w-12 h-12 object-contain mr-4">
+                            <h3 class="text-xl font-bold text-white">Blender</h3>
+                        </div>
+                        <p class="text-sm text-gray-400">Modeling (Low/Highpoly), Compositing, Unwrapping, Texturing, CGI, Lighting, & Animation.</p>
                     </div>
-                    <!-- Autodesk MAYA -->
-                    <div class="glass-panel p-6 rounded-3xl text-center scroll-animate" style="transition-delay: 150ms;">
-                         <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=MAYA" alt="Maya Icon" class="mx-auto mb-4 w-12 h-12 md:w-16 md:h-16 object-contain">
-                        <h3 class="font-bold text-white">Autodesk MAYA</h3>
+                     <!-- Software Item -->
+                    <div class="glass-panel p-6 text-left scroll-animate" style="transition-delay: 150ms;">
+                        <div class="flex items-center mb-3">
+                            <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=MAYA" alt="Maya Icon" class="w-12 h-12 object-contain mr-4">
+                            <h3 class="text-xl font-bold text-white">Autodesk MAYA</h3>
+                        </div>
+                        <p class="text-sm text-gray-400">Organic/Inorganic Modeling, Texturing, Unwrapping, Rigging, Animation, & FX Compositing.</p>
                     </div>
-                    <!-- 3Ds MAX -->
-                    <div class="glass-panel p-6 rounded-3xl text-center scroll-animate" style="transition-delay: 200ms;">
-                        <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=3DS" alt="3DS Max Icon" class="mx-auto mb-4 w-12 h-12 md:w-16 md:h-16 object-contain">
-                        <h3 class="font-bold text-white">3Ds MAX</h3>
+                     <!-- Software Item -->
+                    <div class="glass-panel p-6 text-left scroll-animate" style="transition-delay: 200ms;">
+                        <div class="flex items-center mb-3">
+                            <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=3DS" alt="3DS Max Icon" class="w-12 h-12 object-contain mr-4">
+                            <h3 class="text-xl font-bold text-white">3Ds MAX</h3>
+                        </div>
+                        <p class="text-sm text-gray-400">Modeling, V-Ray, Topology, Scene Animation, Texturing, Lighting, & Rendering.</p>
                     </div>
-                    <!-- Substance Painter -->
-                    <div class="glass-panel p-6 rounded-3xl text-center scroll-animate" style="transition-delay: 250ms;">
-                         <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=SP" alt="Substance Painter Icon" class="mx-auto mb-4 w-12 h-12 md:w-16 md:h-16 object-contain">
-                        <h3 class="font-bold text-white">Substance Painter</h3>
+                    <!-- Software Item -->
+                    <div class="glass-panel p-6 text-left scroll-animate" style="transition-delay: 250ms;">
+                        <div class="flex items-center mb-3">
+                            <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=SP" alt="Substance Painter Icon" class="w-12 h-12 object-contain mr-4">
+                            <h3 class="text-xl font-bold text-white">Substance Painter</h3>
+                        </div>
+                        <p class="text-sm text-gray-400">Advanced PBR material creation, high-quality texturing, and asset pipeline integration.</p>
                     </div>
-                    <!-- Marvelous Designer -->
-                    <div class="glass-panel p-6 rounded-3xl text-center scroll-animate" style="transition-delay: 300ms;">
-                         <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=MD" alt="Marvelous Designer Icon" class="mx-auto mb-4 w-12 h-12 md:w-16 md:h-16 object-contain">
-                        <h3 class="font-bold text-white">Marvelous Designer</h3>
+                     <!-- Software Item -->
+                    <div class="glass-panel p-6 text-left scroll-animate" style="transition-delay: 300ms;">
+                        <div class="flex items-center mb-3">
+                            <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=MD" alt="Marvelous Designer Icon" class="w-12 h-12 object-contain mr-4">
+                            <h3 class="text-xl font-bold text-white">Marvelous Designer</h3>
+                        </div>
+                        <p class="text-sm text-gray-400">Realistic cloth creation, pattern making, stitching, and cloth animation.</p>
                     </div>
-                    <!-- Substance Designer -->
-                    <div class="glass-panel p-6 rounded-3xl text-center scroll-animate" style="transition-delay: 350ms;">
-                         <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=SD" alt="Substance Designer Icon" class="mx-auto mb-4 w-12 h-12 md:w-16 md:h-16 object-contain">
-                        <h3 class="font-bold text-white">Substance Designer</h3>
-                    </div>
-                     <!-- Photoshop -->
-                    <div class="glass-panel p-6 rounded-3xl text-center scroll-animate" style="transition-delay: 400ms;">
-                         <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=PS" alt="Photoshop Icon" class="mx-auto mb-4 w-12 h-12 md:w-16 md:h-16 object-contain">
-                        <h3 class="font-bold text-white">Photoshop</h3>
-                    </div>
-                    <!-- After Effects -->
-                    <div class="glass-panel p-6 rounded-3xl text-center scroll-animate" style="transition-delay: 450ms;">
-                         <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=AE" alt="After Effects Icon" class="mx-auto mb-4 w-12 h-12 md:w-16 md:h-16 object-contain">
-                        <h3 class="font-bold text-white">After Effects</h3>
-                    </div>
-                     <!-- Premiere Pro -->
-                    <div class="glass-panel p-6 rounded-3xl text-center scroll-animate" style="transition-delay: 500ms;">
-                         <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=PR" alt="Premiere Pro Icon" class="mx-auto mb-4 w-12 h-12 md:w-16 md:h-16 object-contain">
-                        <h3 class="font-bold text-white">Premier Pro</h3>
-                    </div>
-                     <!-- Unreal Engine -->
-                     <div class="glass-panel p-6 rounded-3xl text-center scroll-animate" style="transition-delay: 550ms;">
-                         <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=UE" alt="Unreal Engine Icon" class="mx-auto mb-4 w-12 h-12 md:w-16 md:h-16 object-contain">
-                        <h3 class="font-bold text-white">Unreal Engine</h3>
+                     <!-- Software Item -->
+                    <div class="glass-panel p-6 text-left scroll-animate" style="transition-delay: 350ms;">
+                        <div class="flex items-center mb-3">
+                            <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=AE" alt="After Effects Icon" class="w-12 h-12 object-contain mr-4">
+                            <h3 class="text-xl font-bold text-white">After Effects</h3>
+                        </div>
+                        <p class="text-sm text-gray-400">Element3D, Roto Brush, Mocha Pro, 3D Tracking, Post-Production, CGI & VFX.</p>
                     </div>
                 </div>
             </div>
@@ -399,51 +444,56 @@
             <div class="text-center">
                 <h2 class="section-heading scroll-animate">My Journey</h2>
                 <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
-                    <!-- Education Timeline -->
+                    <!-- Education Column -->
                     <div class="scroll-animate" style="transition-delay: 100ms;">
                         <h3 class="text-2xl font-bold text-white mb-6 text-center">Education</h3>
                         <div class="space-y-8">
-                            <div class="glass-panel p-6">
-                                <h4 class="text-lg font-semibold text-white">Cursa</h4>
-                                <span class="text-blue-400 text-sm">Dec 2022 - JAN 2023</span>
-                                <p class="text-gray-400 mt-1">Blender 3.0 basics course by CG Cookie</p>
-                                <a href="https://cursa.app/en/my-certificate/47a5dd91986f763e2464ba4f43c62e4d" target="_blank" class="text-sm text-green-400 hover:underline mt-2 inline-block"><i class="fa-solid fa-certificate"></i> View Certificate</a>
+                            <div class="glass-panel p-6 flex space-x-4">
+                                <div class="text-blue-400 text-2xl mt-1"><i class="fa-solid fa-graduation-cap"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Cursa - Blender 3.0 Basics</h4>
+                                    <span class="text-blue-400 text-sm">Dec 2022 - Jan 2023</span>
+                                    <p class="text-gray-400 text-sm mt-1">Completed comprehensive Blender course by CG Cookie.</p>
+                                </div>
                             </div>
-                            <div class="glass-panel p-6">
-                                <h4 class="text-lg font-semibold text-white">Red & White Multimedia Education</h4>
-                                <span class="text-blue-400 text-sm">NOV 2019 - AUG 2022</span>
-                                <p class="text-gray-400 mt-1">VFX & ANIMATION</p>
-                            </div>
-                            <div class="glass-panel p-6">
-                                <h4 class="text-lg font-semibold text-white">TOPS Technology</h4>
-                                <span class="text-blue-400 text-sm">AUG 2016 - DEC 2016 (6 mos)</span>
-                                <p class="text-gray-400 mt-1">IoT, Mechatronics, Robotics and Automation Engineering</p>
-                                <a href="https://app.box.com/s/vkes4k60nihs2ssha2qcoyp3d2a1r5a3" target="_blank" class="text-sm text-green-400 hover:underline mt-2 inline-block"><i class="fa-solid fa-certificate"></i> View Certificate</a>
+                            <div class="glass-panel p-6 flex space-x-4">
+                                <div class="text-blue-400 text-2xl mt-1"><i class="fa-solid fa-graduation-cap"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Red & White Multimedia</h4>
+                                    <span class="text-blue-400 text-sm">Nov 2019 - Aug 2022</span>
+                                    <p class="text-gray-400 text-sm mt-1">Specialized in VFX & Animation.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Experience Timeline -->
+                    <!-- Experience Column -->
                     <div class="scroll-animate" style="transition-delay: 200ms;">
                         <h3 class="text-2xl font-bold text-white mb-6 text-center">Experience</h3>
                         <div class="space-y-8">
-                            <div class="glass-panel p-6">
-                                <h4 class="text-lg font-semibold text-white">Hakimi Digital</h4>
-                                <span class="text-blue-400 text-sm">Feb 2023 - Running</span>
-                                <p class="text-gray-400 mt-1">3D Artist (Game Ready Models for Indian Train Simulators)</p>
-                                <a href="https://www.broadgaugeproductions.com/bgpro-payware-models" target="_blank" class="text-sm text-green-400 hover:underline mt-2 inline-block"><i class="fa-solid fa-link"></i> Click to View Works</a>
+                            <div class="glass-panel p-6 flex space-x-4">
+                                <div class="text-blue-400 text-2xl mt-1"><i class="fa-solid fa-briefcase"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Hakimi Digital</h4>
+                                    <span class="text-blue-400 text-sm">Feb 2023 - Running</span>
+                                    <p class="text-gray-400 text-sm mt-1">3D Artist for game-ready train simulator models.</p>
+                                </div>
                             </div>
-                             <div class="glass-panel p-6">
-                                <h4 class="text-lg font-semibold text-white">StreakByte</h4>
-                                <span class="text-blue-400 text-sm">Sep 2022 - Nov 2022 (3 mos)</span>
-                                <p class="text-gray-400 mt-1">Low Poly Junior 3D Artist</p>
-                                <a href="https://app.box.com/s/oxhpdzhh2udhp4zjtpmvvhwgyckh1qcb" target="_blank" class="text-sm text-green-400 hover:underline mt-2 inline-block"><i class="fa-solid fa-certificate"></i> View Certificate</a>
+                             <div class="glass-panel p-6 flex space-x-4">
+                                 <div class="text-blue-400 text-2xl mt-1"><i class="fa-solid fa-briefcase"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">StreakByte</h4>
+                                    <span class="text-blue-400 text-sm">Sep 2022 - Nov 2022</span>
+                                    <p class="text-gray-400 text-sm mt-1">Junior 3D Artist, focused on low-poly assets.</p>
+                                </div>
                             </div>
-                             <div class="glass-panel p-6">
-                                <h4 class="text-lg font-semibold text-white">RecruitNXT (Internship)</h4>
-                                <span class="text-blue-400 text-sm">Jun 2021 - Feb 2022 (9 mos)</span>
-                                <p class="text-gray-400 mt-1">Animated Videos, Corporate Video Editor</p>
-                                <a href="https://app.box.com/s/ky8tqxlzwyegvajuxk9ni3zlqvxm5e7v" target="_blank" class="text-sm text-green-400 hover:underline mt-2 inline-block"><i class="fa-solid fa-certificate"></i> View Certificate</a>
+                             <div class="glass-panel p-6 flex space-x-4">
+                                 <div class="text-blue-400 text-2xl mt-1"><i class="fa-solid fa-briefcase"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">RecruitNXT (Internship)</h4>
+                                    <span class="text-blue-400 text-sm">Jun 2021 - Feb 2022</span>
+                                    <p class="text-gray-400 text-sm mt-1">Video Editor for animated and corporate videos.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -456,7 +506,7 @@
             <div class="text-center">
                 <h2 class="section-heading scroll-animate">Remarkable Works</h2>
                 <p class="mt-8 mb-12 max-w-3xl mx-auto text-gray-400 scroll-animate" style="transition-delay: 100ms;">
-                    A comprehensive showcase of my 3D modeling, texturing, animation, and VFX projects.
+                    A showcase of my 3D modeling, animation, and VFX projects. Click to explore.
                 </p>
 
                 <!-- Portfolio Filters -->
@@ -466,13 +516,12 @@
                     <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition btn-primary btn-glow" data-filter="blender">Blender</button>
                     <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition btn-primary btn-glow" data-filter="con">Concept Art</button>
                     <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition btn-primary btn-glow" data-filter="after">After Effects</button>
-                    <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition btn-primary btn-glow" data-filter="pr">Premiere PRO</button>
                     <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition btn-primary btn-glow" data-filter="bts">BTS</button>
                 </div>
 
                 <!-- Portfolio Grid -->
                 <div id="portfolio-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                     <!-- Items will be dynamically generated here based on the user's data -->
+                     <!-- Items are dynamically generated by JavaScript -->
                 </div>
             </div>
         </section>
@@ -483,25 +532,21 @@
                 <h2 class="section-heading scroll-animate">My Achievements</h2>
              </div>
              <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-                <!-- Counter Item 1 -->
                 <div class="glass-panel p-8 text-center scroll-animate" style="transition-delay: 100ms;">
                     <div class="text-blue-400 text-5xl mb-4"><i class="fa-solid fa-cube"></i></div>
                     <div class="text-5xl font-bold text-white mb-2 counter-value" data-target="23">0</div>
                     <p class="text-gray-300 text-lg">NFTs Project</p>
                 </div>
-                 <!-- Counter Item 2 -->
                 <div class="glass-panel p-8 text-center scroll-animate" style="transition-delay: 200ms;">
                     <div class="text-blue-400 text-5xl mb-4"><i class="fa-solid fa-check-double"></i></div>
                     <div class="text-5xl font-bold text-white mb-2 counter-value" data-target="31">0</div>
                     <p class="text-gray-300 text-lg">Project Done</p>
                 </div>
-                <!-- Counter Item 3 -->
                 <div class="glass-panel p-8 text-center scroll-animate" style="transition-delay: 300ms;">
                     <div class="text-blue-400 text-5xl mb-4"><i class="fa-solid fa-award"></i></div>
                     <div class="text-5xl font-bold text-white mb-2 counter-value" data-target="6">0</div>
                     <p class="text-gray-300 text-lg">Certificates Received</p>
                 </div>
-                 <!-- Counter Item 4 -->
                 <div class="glass-panel p-8 text-center scroll-animate" style="transition-delay: 400ms;">
                     <div class="text-blue-400 text-5xl mb-4"><i class="fa-solid fa-heart"></i></div>
                     <div class="text-5xl font-bold text-white mb-2 counter-value" data-target="26">0</div>
@@ -515,14 +560,14 @@
             <div class="text-center">
                  <h2 class="section-heading scroll-animate">Get In Touch</h2>
                  <p class="mt-8 mb-12 max-w-2xl mx-auto text-gray-400 scroll-animate" style="transition-delay: 100ms;">
-                    I'm currently available for freelance projects and full-time opportunities. Have a project in mind? Let's create something amazing together.
+                    I'm available for freelance projects and full-time opportunities. Let's create something amazing together.
                 </p>
             </div>
             <div class="glass-panel p-8 md:p-12 mt-16 scroll-animate">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     <div>
                         <h3 class="text-2xl font-bold text-white mb-6 text-left">Contact Form</h3>
-                        <form action="https://formspree.io/xknqajww" method="POST" class="space-y-6 text-left">
+                        <form action="https://formspree.io/f/xknqajww" method="POST" class="space-y-6 text-left">
                             <div>
                                 <input type="text" name="name" placeholder="Name" class="w-full bg-gray-900/50 text-white rounded-lg p-3 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" required>
                             </div>
@@ -555,9 +600,6 @@
                                 <i class="fa fa-phone text-blue-400 text-2xl mt-1"></i>
                                 <p><a href="tel:919824594156" class="text-blue-400 hover:underline">+ (91) 98245 94156</a></p>
                             </div>
-                        </div>
-                        <div class="mt-8 rounded-2xl overflow-hidden h-64">
-                            <iframe class="w-full h-full" title="Google Map of Hook Star Animation, Surat" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3719.3379430095288!2d72.85362572584508!3d21.218443681235403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04fc17e32e3df%3A0xbf008c3e052d356c!2sHook%20Star%20Animation!5e0!3m2!1sen!2sin!4v1707661318224!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
                         </div>
                     </div>
                 </div>
@@ -633,15 +675,17 @@
                             <h3 class="text-lg font-semibold mt-4 text-white">${item.title}</h3>
                         `;
                     } else if (item.type === 'sketchfab' || item.type === 'youtube') {
-                        const wrapperClass = item.type === 'sketchfab' ? 'sketchfab-embed-wrapper' : 'youtube-embed-wrapper';
-                         content = `
-                            <div class="${wrapperClass} bg-gray-900/50 rounded-xl">
-                                <iframe title="${item.title}" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="${item.embedUrl}"></iframe>
-                            </div>
-                            <h3 class="text-lg font-semibold mt-4 text-white">${item.title}</h3>
-                        `;
+                        const embedWrapper = document.createElement('div');
+                        embedWrapper.className = 'relative aspect-video bg-gray-900/50 rounded-xl overflow-hidden';
+                        embedWrapper.innerHTML = `<iframe title="${item.title}" class="absolute top-0 left-0 w-full h-full" frameborder="0" allowfullscreen allow="autoplay; fullscreen; xr-spatial-tracking" src="${item.embedUrl}"></iframe>`;
+                        
+                        itemEl.appendChild(embedWrapper);
+                        const titleEl = document.createElement('h3');
+                        titleEl.className = 'text-lg font-semibold mt-4 text-white';
+                        titleEl.textContent = item.title;
+                        itemEl.appendChild(titleEl);
                     }
-                    itemEl.innerHTML = content;
+                    if(content) itemEl.innerHTML = content;
                     portfolioGrid.appendChild(itemEl);
                 });
                 
@@ -668,11 +712,7 @@
             // Header Style on Scroll
             const header = document.getElementById('header');
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                     header.classList.remove('py-3');
-                } else {
-                     header.classList.add('py-3');
-                }
+                header.classList.toggle('py-3', window.scrollY <= 50);
             });
 
             // Portfolio Filtering
@@ -710,19 +750,57 @@
                 });
             }, { threshold: 0.8 });
             document.querySelectorAll('.counter-value').forEach(counter => counterObserver.observe(counter));
+            
+            // Generic Popup Logic
+            function showPopup(contentHtml) {
+                const popup = document.createElement('div');
+                popup.className = 'popup-overlay';
+                popup.innerHTML = `
+                    <div class="popup-content">
+                        <span class="popup-close-btn">&times;</span>
+                        ${contentHtml}
+                    </div>
+                `;
+                document.body.appendChild(popup);
+                
+                // Show with transition
+                setTimeout(() => popup.classList.add('visible'), 10);
+                
+                const close = () => {
+                    popup.classList.remove('visible');
+                    setTimeout(() => popup.remove(), 300);
+                };
 
-            // Lightbox
-            document.body.addEventListener('click', e => {
-                if (e.target.closest('a.lightbox.preview')) {
-                    e.preventDefault();
-                    const imageSrc = e.target.closest('a.lightbox.preview').getAttribute('href');
-                    const lightbox = document.createElement('div');
-                    lightbox.id = 'custom-lightbox';
-                    lightbox.classList.add('fixed', 'inset-0', 'bg-black/90', 'flex', 'items-center', 'justify-center', 'z-[9999]', 'p-4');
-                    lightbox.innerHTML = `<div class="relative"><img src="${imageSrc}" class="max-w-full max-h-[90vh]"><button class="absolute -top-4 -right-4 text-white text-4xl">&times;</button></div>`;
-                    document.body.appendChild(lightbox);
-                    lightbox.addEventListener('click', () => lightbox.remove());
-                }
+                popup.querySelector('.popup-close-btn').addEventListener('click', close);
+                popup.addEventListener('click', e => {
+                    if (e.target === popup) close();
+                });
+            }
+
+            // Showreel Popup
+            document.getElementById('showreel-btn').addEventListener('click', () => {
+                const videoHtml = `
+                    <div class="popup-video-container glass-panel overflow-hidden">
+                        <iframe src="https://www.youtube.com/embed/BgzEm8mBUzQ?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>`;
+                showPopup(videoHtml);
+            });
+
+            // Portfolio Links Popup
+            document.getElementById('portfolio-links-btn').addEventListener('click', () => {
+                const linksHtml = `
+                    <div class="glass-panel p-8 text-center">
+                        <h3 class="text-2xl font-bold text-white mb-6">Explore My Portfolios</h3>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="https://www.playbook.com/s/hookstarfx/works" target="_blank" class="px-6 py-3 rounded-full text-sm font-semibold transition btn-primary btn-glow flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-book-open"></i><span>View PlayBook</span>
+                            </a>
+                            <a href="https://www.artstation.com/hookstar1993" target="_blank" class="px-6 py-3 rounded-full text-sm font-semibold transition btn-secondary btn-glow flex items-center justify-center space-x-2">
+                                <i class="fa-brands fa-artstation"></i><span>Visit ArtStation</span>
+                            </a>
+                        </div>
+                    </div>`;
+                showPopup(linksHtml);
             });
 
             // Initial Portfolio Render

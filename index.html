@@ -352,19 +352,44 @@
                 <h2 class="section-heading scroll-animate">About Me</h2>
             </div>
             <div class="glass-panel p-8 md:p-12 mt-16 scroll-animate">
-                <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
-                    <img src="https://placehold.co/400x400/3B82F6/FFFFFF?text=HS" alt="Hardeep Savani" class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover shadow-2xl border-4 border-gray-700/50 flex-shrink-0">
-                    <div class="text-center md:text-left">
-                        <h3 class="text-2xl font-bold text-white mb-4">Hi Guys!</h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            I am Hardeep Savani, with 2+ years of experience in 3D modeling, texturing, animation, and CGI/VFX. I have a successful history in the game and media industry and am skilled in the complete 3D pipeline. I'm a VNSGU graduate with a strong passion for arts and design.
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 items-center">
+                    <div class="lg:col-span-1 flex justify-center">
+                        <img src="https://placehold.co/400x400/3B82F6/FFFFFF?text=HS" alt="Hardeep Savani" class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover shadow-2xl border-4 border-gray-700/50 flex-shrink-0">
+                    </div>
+                    <div class="lg:col-span-2 text-center lg:text-left">
+                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">Hi Guys! I'm Hardeep Savani</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">
+                           With extensive experience in 3D modeling, texturing, animation, and CGI/VFX, I have a successful history in the game and media industry. I'm skilled in the complete 3D pipeline, from modeling and unwrapping to rendering and compositing. As a VNSGU graduate, I bring a strong background in arts and design to every project.
                         </p>
-                        <p class="text-blue-400 font-bold mt-4">- 3D, VFX & CGI Artist</p>
-                        <ul class="list-disc list-inside text-gray-400 ml-4">
-                            <li><strong>3D - </strong> Animation, Modeling, Unwraping, Rigging, Texturing, Lighting, Rendering</li>
-                            <li><strong>VFX & CGI - </strong> Compositing, Rotoscoping, Camera Tracking, Color Grading</li>
-                        </ul>
-                         <div class="flex flex-wrap gap-4 mt-8 justify-center md:justify-start">
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 text-sm text-left">
+                            <!-- Personal Details -->
+                            <div class="space-y-3">
+                                <div class="flex"><strong class="w-28 text-gray-300 flex-shrink-0">Name:</strong><span class="text-gray-400">Hardeep Savani</span></div>
+                                <div class="flex"><strong class="w-28 text-gray-300 flex-shrink-0">Age:</strong><span id="dynamic-age" class="text-gray-400"></span></div>
+                                <div class="flex"><strong class="w-28 text-gray-300 flex-shrink-0">Experience:</strong><span id="dynamic-experience" class="text-gray-400"></span></div>
+                                <div class="flex"><strong class="w-28 text-gray-300 flex-shrink-0">Country:</strong><span class="text-gray-400">India</span></div>
+                                <div class="flex"><strong class="w-28 text-gray-300 flex-shrink-0">Location:</strong><span class="text-gray-400">Surat, Gujarat</span></div>
+                                <div class="flex"><strong class="w-28 text-gray-300 flex-shrink-0">Notice Period:</strong><span class="text-gray-400">30 days</span></div>
+                            </div>
+                            <!-- Skills -->
+                            <div class="space-y-4">
+                                <div>
+                                    <strong class="text-gray-300 block mb-1">3D Skills:</strong>
+                                    <p class="text-gray-400 text-xs">Animation, Modeling, Unwrapping, Rigging, Texturing, Lighting, Rendering</p>
+                                </div>
+                                <div>
+                                    <strong class="text-gray-300 block mb-1">VFX & CGI Skills:</strong>
+                                    <p class="text-gray-400 text-xs">Compositing, Rotoscoping, Camera Tracking, Color Grading</p>
+                                </div>
+                                <div>
+                                    <strong class="text-gray-300 block mb-1">Strengths:</strong>
+                                    <p class="text-gray-400 text-xs">Quality Work, Communication, Determination</p>
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="flex flex-wrap gap-4 mt-8 justify-center lg:justify-start">
                             <a href="https://bit.ly/hardeepsavani-cv" class="px-5 py-2 rounded-full text-sm font-semibold transition btn-primary btn-glow flex items-center space-x-2" target="_blank">
                                 <i class="fa-solid fa-file-pdf"></i><span>Download Resume</span>
                             </a>
@@ -387,53 +412,141 @@
             <div class="text-center">
                 <h2 class="section-heading scroll-animate">Software Abilities</h2>
                 <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Software Item -->
+                    <!-- Software Item: Blender -->
                     <div class="glass-panel p-6 text-left scroll-animate" style="transition-delay: 100ms;">
                         <div class="flex items-center mb-3">
                             <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=BL" alt="Blender Icon" class="w-12 h-12 object-contain mr-4">
                             <h3 class="text-xl font-bold text-white">Blender</h3>
                         </div>
-                        <p class="text-sm text-gray-400">Modeling (Low/Highpoly), Compositing, Unwrapping, Texturing, CGI, Lighting, & Animation.</p>
+                        <ul class="list-disc list-inside text-gray-400 text-sm ml-4">
+                            <li>Modeling (Low, Mid & Highpoly)</li>
+                            <li>Compositing</li>
+                            <li>Unwrapping</li>
+                            <li>Texturing</li>
+                            <li>CGI</li>
+                            <li>Lighting</li>
+                            <li>Character, Physics Animation</li>
+                        </ul>
                     </div>
-                     <!-- Software Item -->
+                     <!-- Software Item: Autodesk MAYA -->
                     <div class="glass-panel p-6 text-left scroll-animate" style="transition-delay: 150ms;">
                         <div class="flex items-center mb-3">
                             <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=MAYA" alt="Maya Icon" class="w-12 h-12 object-contain mr-4">
                             <h3 class="text-xl font-bold text-white">Autodesk MAYA</h3>
                         </div>
-                        <p class="text-sm text-gray-400">Organic/Inorganic Modeling, Texturing, Unwrapping, Rigging, Animation, & FX Compositing.</p>
+                        <ul class="list-disc list-inside text-gray-400 text-sm ml-4">
+                            <li>UnOrganics, Organics Modeling</li>
+                            <li>Texturing</li>
+                            <li>UnWrapping</li>
+                            <li>Animal Modeling</li>
+                            <li>Rigging</li>
+                            <li>Animations</li>
+                            <li>FX, Compositing</li>
+                        </ul>
                     </div>
-                     <!-- Software Item -->
+                     <!-- Software Item: 3Ds MAX -->
                     <div class="glass-panel p-6 text-left scroll-animate" style="transition-delay: 200ms;">
                         <div class="flex items-center mb-3">
                             <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=3DS" alt="3DS Max Icon" class="w-12 h-12 object-contain mr-4">
                             <h3 class="text-xl font-bold text-white">3Ds MAX</h3>
                         </div>
-                        <p class="text-sm text-gray-400">Modeling, V-Ray, Topology, Scene Animation, Texturing, Lighting, & Rendering.</p>
+                        <ul class="list-disc list-inside text-gray-400 text-sm ml-4">
+                            <li>Modeling</li>
+                            <li>V-Ray</li>
+                            <li>Topology</li>
+                            <li>Animate Scene</li>
+                            <li>Texturing</li>
+                            <li>Lighting</li>
+                            <li>Rendering</li>
+                        </ul>
                     </div>
-                    <!-- Software Item -->
+                    <!-- Software Item: Substance Painter -->
                     <div class="glass-panel p-6 text-left scroll-animate" style="transition-delay: 250ms;">
                         <div class="flex items-center mb-3">
                             <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=SP" alt="Substance Painter Icon" class="w-12 h-12 object-contain mr-4">
                             <h3 class="text-xl font-bold text-white">Substance Painter</h3>
                         </div>
-                        <p class="text-sm text-gray-400">Advanced PBR material creation, high-quality texturing, and asset pipeline integration.</p>
+                        <ul class="list-disc list-inside text-gray-400 text-sm ml-4">
+                            <li>Advanced material creation</li>
+                            <li>High quality PBR textures</li>
+                            <li>Accurate models and UV’s based on references</li>
+                            <li>Work with the defined pipeline</li>
+                            <li>Developing the material library</li>
+                            <li>Image creation/manipulation tools</li>
+                        </ul>
                     </div>
-                     <!-- Software Item -->
+                     <!-- Software Item: Marvelous Designer -->
                     <div class="glass-panel p-6 text-left scroll-animate" style="transition-delay: 300ms;">
                         <div class="flex items-center mb-3">
                             <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=MD" alt="Marvelous Designer Icon" class="w-12 h-12 object-contain mr-4">
                             <h3 class="text-xl font-bold text-white">Marvelous Designer</h3>
                         </div>
-                        <p class="text-sm text-gray-400">Realistic cloth creation, pattern making, stitching, and cloth animation.</p>
+                        <ul class="list-disc list-inside text-gray-400 text-sm ml-4">
+                            <li>Cloth Making</li>
+                            <li>Stitching</li>
+                            <li>Cloth Animate</li>
+                            <li>Texturing</li>
+                            <li>Pattern Creating</li>
+                            <li>Sewing</li>
+                        </ul>
                     </div>
-                     <!-- Software Item -->
+                     <!-- Software Item: Substance Designer -->
                     <div class="glass-panel p-6 text-left scroll-animate" style="transition-delay: 350ms;">
+                        <div class="flex items-center mb-3">
+                            <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=SD" alt="Substance Designer Icon" class="w-12 h-12 object-contain mr-4">
+                            <h3 class="text-xl font-bold text-white">Substance Designer</h3>
+                        </div>
+                        <ul class="list-disc list-inside text-gray-400 text-sm ml-4">
+                            <li>Texture Making</li>
+                            <li>Compositing Textures</li>
+                            <li>Custom Textures</li>
+                            <li>Pattern Creating</li>
+                        </ul>
+                    </div>
+                     <!-- Software Item: Photoshop -->
+                    <div class="glass-panel p-6 text-left scroll-animate" style="transition-delay: 400ms;">
+                        <div class="flex items-center mb-3">
+                            <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=PS" alt="Photoshop Icon" class="w-12 h-12 object-contain mr-4">
+                            <h3 class="text-xl font-bold text-white">Photoshop</h3>
+                        </div>
+                        <ul class="list-disc list-inside text-gray-400 text-sm ml-4">
+                            <li>Background Removing/changing/deep etching</li>
+                            <li>Image manipulation</li>
+                            <li>Photo restoration</li>
+                            <li>Color Correction</li>
+                            <li>Flyer/Brochure design</li>
+                        </ul>
+                    </div>
+                    <!-- Software Item: After Effects -->
+                    <div class="glass-panel p-6 text-left scroll-animate" style="transition-delay: 450ms;">
                         <div class="flex items-center mb-3">
                             <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=AE" alt="After Effects Icon" class="w-12 h-12 object-contain mr-4">
                             <h3 class="text-xl font-bold text-white">After Effects</h3>
                         </div>
-                        <p class="text-sm text-gray-400">Element3D, Roto Brush, Mocha Pro, 3D Tracking, Post-Production, CGI & VFX.</p>
+                        <ul class="list-disc list-inside text-gray-400 text-sm ml-4">
+                            <li>Element3D</li>
+                            <li>Roto Brush</li>
+                            <li>Mocha Pro</li>
+                            <li>3D Tracking</li>
+                            <li>Post-Production, Action CGI & VFX</li>
+                            <li>Video Copilot</li>
+                        </ul>
+                    </div>
+                     <!-- Software Item: Premiere Pro -->
+                    <div class="glass-panel p-6 text-left scroll-animate" style="transition-delay: 500ms;">
+                        <div class="flex items-center mb-3">
+                            <img src="https://placehold.co/64x64/3B82F6/FFFFFF?text=PR" alt="Premiere Pro Icon" class="w-12 h-12 object-contain mr-4">
+                            <h3 class="text-xl font-bold text-white">Premier Pro</h3>
+                        </div>
+                        <ul class="list-disc list-inside text-gray-400 text-sm ml-4">
+                            <li>Compositing</li>
+                            <li>Clip Arrangements</li>
+                            <li>Corporate Video Making</li>
+                            <li>Color Grading</li>
+                            <li>Masking</li>
+                            <li>Infinite Loop</li>
+                            <li>Sound Design</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -449,19 +562,53 @@
                         <h3 class="text-2xl font-bold text-white mb-6 text-center">Education</h3>
                         <div class="space-y-8">
                             <div class="glass-panel p-6 flex space-x-4">
-                                <div class="text-blue-400 text-2xl mt-1"><i class="fa-solid fa-graduation-cap"></i></div>
+                                <div class="text-blue-400 text-2xl mt-1 flex-shrink-0"><i class="fa-solid fa-graduation-cap"></i></div>
                                 <div>
                                     <h4 class="font-semibold text-white">Cursa - Blender 3.0 Basics</h4>
                                     <span class="text-blue-400 text-sm">Dec 2022 - Jan 2023</span>
                                     <p class="text-gray-400 text-sm mt-1">Completed comprehensive Blender course by CG Cookie.</p>
+                                    <a href="https://cursa.app/en/my-certificate/47a5dd91986f763e2464ba4f43c62e4d" target="_blank" class="text-sm text-green-400 hover:underline mt-2 inline-block"><i class="fa-solid fa-certificate mr-1"></i> View Certificate</a>
                                 </div>
                             </div>
                             <div class="glass-panel p-6 flex space-x-4">
-                                <div class="text-blue-400 text-2xl mt-1"><i class="fa-solid fa-graduation-cap"></i></div>
+                                <div class="text-blue-400 text-2xl mt-1 flex-shrink-0"><i class="fa-solid fa-graduation-cap"></i></div>
                                 <div>
-                                    <h4 class="font-semibold text-white">Red & White Multimedia</h4>
+                                    <h4 class="font-semibold text-white">Red & White Multimedia Education</h4>
                                     <span class="text-blue-400 text-sm">Nov 2019 - Aug 2022</span>
-                                    <p class="text-gray-400 text-sm mt-1">Specialized in VFX & Animation.</p>
+                                    <p class="text-gray-400 text-sm mt-1">Specialized in VFX & ANIMATION.</p>
+                                </div>
+                            </div>
+                            <div class="glass-panel p-6 flex space-x-4">
+                                <div class="text-blue-400 text-2xl mt-1 flex-shrink-0"><i class="fa-solid fa-graduation-cap"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">TOPS Technology</h4>
+                                    <span class="text-blue-400 text-sm">Aug 2016 - Dec 2016 (6 mos)</span>
+                                    <p class="text-gray-400 text-sm mt-1">IoT, Mechatronics, Robotics and Automation Engineering.</p>
+                                    <a href="https://app.box.com/s/vkes4k60nihs2ssha2qcoyp3d2a1r5a3" target="_blank" class="text-sm text-green-400 hover:underline mt-2 inline-block"><i class="fa-solid fa-certificate mr-1"></i> View Certificate</a>
+                                </div>
+                            </div>
+                            <div class="glass-panel p-6 flex space-x-4">
+                                <div class="text-blue-400 text-2xl mt-1 flex-shrink-0"><i class="fa-solid fa-graduation-cap"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">BCA : Amababa Commerce Collage - (VNSGU)</h4>
+                                    <span class="text-blue-400 text-sm">2013 - 2016</span>
+                                    <p class="text-gray-400 text-sm mt-1">Bachelor In Computer Application.</p>
+                                </div>
+                            </div>
+                             <div class="glass-panel p-6 flex space-x-4">
+                                <div class="text-blue-400 text-2xl mt-1 flex-shrink-0"><i class="fa-solid fa-graduation-cap"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Higher Secondary School - Nirman High School</h4>
+                                    <span class="text-blue-400 text-sm">2011 - 2013</span>
+                                    <p class="text-gray-400 text-sm mt-1">11th & 12th Grade.</p>
+                                </div>
+                            </div>
+                             <div class="glass-panel p-6 flex space-x-4">
+                                <div class="text-blue-400 text-2xl mt-1 flex-shrink-0"><i class="fa-solid fa-graduation-cap"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Secondary School - P.P. Savani High School</h4>
+                                    <span class="text-blue-400 text-sm">1998 - 2011</span>
+                                    <p class="text-gray-400 text-sm mt-1">1st to 10th Grade.</p>
                                 </div>
                             </div>
                         </div>
@@ -472,27 +619,63 @@
                         <h3 class="text-2xl font-bold text-white mb-6 text-center">Experience</h3>
                         <div class="space-y-8">
                             <div class="glass-panel p-6 flex space-x-4">
-                                <div class="text-blue-400 text-2xl mt-1"><i class="fa-solid fa-briefcase"></i></div>
+                                <div class="text-blue-400 text-2xl mt-1 flex-shrink-0"><i class="fa-solid fa-briefcase"></i></div>
                                 <div>
                                     <h4 class="font-semibold text-white">Hakimi Digital</h4>
                                     <span class="text-blue-400 text-sm">Feb 2023 - Running</span>
-                                    <p class="text-gray-400 text-sm mt-1">3D Artist for game-ready train simulator models.</p>
+                                    <p class="text-gray-400 text-sm mt-1">3D Artist (High, Mid, Low Poly, Realistic High Poly for Game Models(Indian Train Locomotives) & Texturing).</p>
+                                    <a href="https://www.broadgaugeproductions.com/bgpro-payware-models" target="_blank" class="text-sm text-green-400 hover:underline mt-2 inline-block"><i class="fa-solid fa-link mr-1"></i> Click to View Works</a>
                                 </div>
                             </div>
                              <div class="glass-panel p-6 flex space-x-4">
-                                 <div class="text-blue-400 text-2xl mt-1"><i class="fa-solid fa-briefcase"></i></div>
+                                 <div class="text-blue-400 text-2xl mt-1 flex-shrink-0"><i class="fa-solid fa-briefcase"></i></div>
                                 <div>
                                     <h4 class="font-semibold text-white">StreakByte</h4>
-                                    <span class="text-blue-400 text-sm">Sep 2022 - Nov 2022</span>
-                                    <p class="text-gray-400 text-sm mt-1">Junior 3D Artist, focused on low-poly assets.</p>
+                                    <span class="text-blue-400 text-sm">Sep 2022 - Nov 2022 (3 mos)</span>
+                                    <p class="text-gray-400 text-sm mt-1">Low Poly Junior 3D Artist.</p>
+                                    <a href="https://app.box.com/s/oxhpdzhh2udhp4zjtpmvvhwgyckh1qcb" target="_blank" class="text-sm text-green-400 hover:underline mt-2 inline-block"><i class="fa-solid fa-certificate mr-1"></i> View Certificate</a>
+                                </div>
+                            </div>
+                            <div class="glass-panel p-6 flex space-x-4">
+                                 <div class="text-blue-400 text-2xl mt-1 flex-shrink-0"><i class="fa-solid fa-briefcase"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Freelancing</h4>
+                                    <span class="text-blue-400 text-sm">Feb 2022 - Sep 2022</span>
+                                    <p class="text-gray-400 text-sm mt-1">Online Freelancing Work on Fiverr, Freelancer, etc.</p>
                                 </div>
                             </div>
                              <div class="glass-panel p-6 flex space-x-4">
-                                 <div class="text-blue-400 text-2xl mt-1"><i class="fa-solid fa-briefcase"></i></div>
+                                 <div class="text-blue-400 text-2xl mt-1 flex-shrink-0"><i class="fa-solid fa-briefcase"></i></div>
                                 <div>
                                     <h4 class="font-semibold text-white">RecruitNXT (Internship)</h4>
-                                    <span class="text-blue-400 text-sm">Jun 2021 - Feb 2022</span>
-                                    <p class="text-gray-400 text-sm mt-1">Video Editor for animated and corporate videos.</p>
+                                    <span class="text-blue-400 text-sm">Jun 2021 - Feb 2022 (9 mos)</span>
+                                    <p class="text-gray-400 text-sm mt-1">Animated Videos, Corporate Video Editor, Products Demo Ex-plainer.</p>
+                                    <a href="https://app.box.com/s/ky8tqxlzwyegvajuxk9ni3zlqvxm5e7v" target="_blank" class="text-sm text-green-400 hover:underline mt-2 inline-block"><i class="fa-solid fa-certificate mr-1"></i> View Certificate</a>
+                                </div>
+                            </div>
+                            <div class="glass-panel p-6 flex space-x-4">
+                                 <div class="text-blue-400 text-2xl mt-1 flex-shrink-0"><i class="fa-solid fa-briefcase"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Freelancing</h4>
+                                    <span class="text-blue-400 text-sm">2019 - 2021</span>
+                                    <p class="text-gray-400 text-sm mt-1">Online Freelancing Work on Fiverr, Freelancer, etc.</p>
+                                </div>
+                            </div>
+                             <div class="glass-panel p-6 flex space-x-4">
+                                 <div class="text-blue-400 text-2xl mt-1 flex-shrink-0"><i class="fa-solid fa-briefcase"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Dream Vision Automation Solution</h4>
+                                    <span class="text-blue-400 text-sm">Jan 2018 - Oct 2019 (1 Year 9 mos)</span>
+                                    <p class="text-gray-400 text-sm mt-1">Automation Programmer (KNX, C++, PhotoShop, ELAN, RAKO etc.).</p>
+                                    <a href="https://app.box.com/file/1441634010301?s=h8v4la0fb6ex208hikvmjvhs8kj3q5pq" target="_blank" class="text-sm text-green-400 hover:underline mt-2 inline-block"><i class="fa-solid fa-certificate mr-1"></i> View Certificate</a>
+                                </div>
+                            </div>
+                            <div class="glass-panel p-6 flex space-x-4">
+                                 <div class="text-blue-400 text-2xl mt-1 flex-shrink-0"><i class="fa-solid fa-briefcase"></i></div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Data Info Line</h4>
+                                    <span class="text-blue-400 text-sm">Oct 2017 - Jun 2018</span>
+                                    <p class="text-gray-400 text-sm mt-1">Automation Services, Smart Home, R & D.</p>
                                 </div>
                             </div>
                         </div>
@@ -629,24 +812,54 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // Portfolio Data
+            // Portfolio Data - All items from user's reference code
             const portfolioData = [
                 { title: 'Redbull Blender', type: 'image', category: 'blender', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Redbull+Blender', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Redbull+Blender+Large', link: 'https://www.artstation.com/artwork/ZaegV1' },
+                { title: 'Hanuman Mace Image', type: 'image', category: 'blender', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Hanuman+Mace', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Hanuman+Mace+Large', link: 'https://www.artstation.com/artwork/g0N5JZ' },
                 { title: 'Hanuman Gada (Mace) 2023', type: 'sketchfab', category: 'blender', embedUrl: 'https://sketchfab.com/models/39128269b59246cd89d5e6afdd3dee50/embed?camera=0&preload=1&ui_theme=dark' },
-                { title: 'NATIONAL PANASONIC RADIO', type: 'sketchfab', category: '3ds', embedUrl: 'https://sketchfab.com/models/630a43a222634241b987be824795019f/embed?camera=0&preload=1&ui_theme=dark' },
+                { title: 'National Panasonic Radio Image', type: 'image', category: '3ds blender', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Panasonic+Radio', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Panasonic+Radio+Large', link: 'https://www.artstation.com/artwork/EvdA0K' },
+                { title: 'NATIONAL PANASONIC RADIO - RX-5010F', type: 'sketchfab', category: '3ds', embedUrl: 'https://sketchfab.com/models/630a43a222634241b987be824795019f/embed?camera=0&preload=1&ui_theme=dark' },
                 { title: 'Vintage Train Oil Tanker', type: 'sketchfab', category: '3ds', embedUrl: 'https://sketchfab.com/models/1acac46dbcf74af58929d8f63e80d2c9/embed?camera=0&preload=1&ui_theme=dark' },
+                { title: 'Premium Gaming Chair Image', type: 'image', category: '3ds', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Gaming+Chair', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Gaming+Chair+Large', link: 'https://www.artstation.com/artwork/rJY0wG' },
                 { title: 'Premium Gaming Chair', type: 'sketchfab', category: '3ds', embedUrl: 'https://sketchfab.com/models/b3181659664e4559b803f9740ac0efdd/embed?camera=0&preload=1&ui_theme=dark' },
-                { title: 'ReFX Nexus 4 Synthesizer', type: 'sketchfab', category: '3ds blender', embedUrl: 'https://sketchfab.com/models/63464bdc66c34295b8b8c6b1eae879de/embed?camera=0&preload=1&ui_theme=dark' },
+                { title: 'Mini Moog Synthesizer Image', type: 'image', category: 'blender 3ds', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Mini+Moog', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Mini+Moog+Large', link: 'https://www.artstation.com/artwork/zPB9Kd' },
+                { title: 'Ignite Heat Up Image', type: 'image', category: 'blender 3ds', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Ignite+Heat+Up', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Ignite+Heat+Up+Large', link: 'https://www.artstation.com/artwork/EvJ3y8' },
+                { title: 'Astro Animation Image', type: 'image', category: 'blender con', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Astro+Animation', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Astro+Animation+Large', link: 'https://www.artstation.com/artwork/038EgV' },
+                { title: 'ReFX Nexus 4 Synthesizer Image', type: 'image', category: '3ds blender', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=ReFX+Nexus+4', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=ReFX+Nexus+4+Large', link: 'https://www.artstation.com/artwork/49E682' },
+                { title: 'ReFX Nexus 4 - Virtual Synthesizer', type: 'sketchfab', category: '3ds', embedUrl: 'https://sketchfab.com/models/63464bdc66c34295b8b8c6b1eae879de/embed?camera=0&preload=1&ui_theme=dark' },
                 { title: 'Blender Stylized Rock Tutorial', type: 'youtube', category: 'bts', embedUrl: 'https://www.youtube.com/embed/8N6JgGvfLlk' },
                 { title: 'Blender Basic Tutorial Playlist', type: 'youtube', category: 'bts', embedUrl: 'https://www.youtube.com/embed/videoseries?list=PLxkkJDIf-D4fqvN-HE-un9FjV7vJ7yNVV' },
+                { title: 'Blender Game Asset Tutorial Playlist', type: 'youtube', category: 'bts', embedUrl: 'https://www.youtube.com/embed/videoseries?list=PLxkkJDIf-D4cn9kPUB8SO0D2-6qdkecro' },
+                { title: 'Blender Animation Tutorial Playlist', type: 'youtube', category: 'bts', embedUrl: 'https://www.youtube.com/embed/videoseries?list=PLxkkJDIf-D4eyqreRVImLMwN3PX1ifgkX' },
+                { title: 'Blender Animation Showcase', type: 'youtube', category: 'blender', embedUrl: 'https://www.youtube.com/embed/MBtzxi2654Y' },
+                { title: 'Blender Sci-Fi Scene', type: 'youtube', category: 'all blender', embedUrl: 'https://www.youtube.com/embed/gzkkzWPgF6g' },
                 { title: 'Demo Showreel 2023', type: 'youtube', category: 'all blender 3ds con after pr', embedUrl: 'https://www.youtube.com/embed/BgzEm8mBUzQ' },
+                { title: 'Pickup Truck Image', type: 'image', category: '3ds', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Pickup+Truck', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Pickup+Truck+Large', link: 'https://www.artstation.com/artwork/Ar42Wq' },
+                { title: 'Lotion Bottle Image', type: 'image', category: '3ds', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Lotion+Bottle', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Lotion+Bottle+Large', link: 'https://www.artstation.com/artwork/RnBOxE' },
                 { title: 'Product Animation - Body Lotion', type: 'youtube', category: '3ds', embedUrl: 'https://www.youtube.com/embed/5ZdWciCm9Y8' },
+                { title: 'Perfume Bottle Image', type: 'image', category: '3ds', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Perfume+Bottle', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Perfume+Bottle+Large', link: 'https://www.artstation.com/artwork/o2d5QL' },
+                { title: 'Product Animation - Cosmetic Bottle', type: 'youtube', category: '3ds', embedUrl: 'https://www.youtube.com/embed/GZjdpMcbx8Y' },
+                { title: 'Sylenth1 Synthesizer Image', type: 'image', category: '3ds', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Sylenth1', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Sylenth1+Large', link: 'https://www.artstation.com/artwork/xYeDdX' },
                 { title: 'Sylenth1 - LennarDigital', type: 'sketchfab', category: '3ds', embedUrl: 'https://sketchfab.com/models/be50a3c7ee9549bc9db2add042ddd794/embed?camera=0&preload=1&ui_theme=dark' },
+                { title: 'Abstract Concept Art 1', type: 'image', category: 'blender con', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Concept+Art+1', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Concept+Art+1+Large', link: 'https://www.instagram.com/p/CXK4fLPI-Nm/' },
+                { title: 'Stylized Butterfly Image', type: 'image', category: '3ds', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Stylized+Butterfly', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Stylized+Butterfly+Large', link: 'https://www.artstation.com/artwork/g8xx9Z' },
                 { title: 'Stylized Butterfly', type: 'sketchfab', category: '3ds', embedUrl: 'https://sketchfab.com/models/6c35649cfcd74afd924690814d79e755/embed?camera=0&preload=1&ui_theme=dark' },
-                { title: 'Sennheiser HD500 Headphone', type: 'sketchfab', category: '3ds', embedUrl: 'https://sketchfab.com/models/b8465dabd73149778cc51c6e33e0dde6/embed?camera=0&preload=1&ui_theme=dark' },
+                { title: 'Abstract Concept Art 2', type: 'image', category: 'con', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Concept+Art+2', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Concept+Art+2+Large', link: 'https://www.instagram.com/p/CXyZXwmI4W7/' },
+                { title: 'Sennheiser HD500 Headphone Image', type: 'image', category: '3ds', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Headphone', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Headphone+Large', link: 'https://www.artstation.com/artwork/nE129K' },
+                { title: 'Sennheiser HD500 Open Fusion Headphone', type: 'sketchfab', category: '3ds', embedUrl: 'https://sketchfab.com/models/b8465dabd73149778cc51c6e33e0dde6/embed?camera=0&preload=1&ui_theme=dark' },
                 { title: 'AirPods 2', type: 'sketchfab', category: '3ds', embedUrl: 'https://sketchfab.com/models/0650196fa9e146c7a9a6b1c3bc33127f/embed?camera=0&preload=1&ui_theme=dark' },
-                { title: 'Game House Assets', type: 'sketchfab', category: '3ds', embedUrl: 'https://sketchfab.com/models/ff45e94fdba748ecafc68d9df0e63305/embed?camera=0&preload=1&ui_theme=dark' },
+                { title: 'Blender Sci-Fi City Animation', type: 'youtube', category: 'blender', embedUrl: 'https://www.youtube.com/embed/QaVQvTzi8Xo' },
+                { title: 'Pineapple', type: 'sketchfab', category: '3ds', embedUrl: 'https://sketchfab.com/models/772a5a438c9242a09aac5c6ec6155c40/embed?camera=0&preload=1&ui_theme=dark' },
+                { title: 'Blender Ocean Simulation', type: 'youtube', category: 'blender', embedUrl: 'https://www.youtube.com/embed/V64lHXfowMk' },
+                { title: 'Blender Sci-Fi Corridor Animation', type: 'youtube', category: 'blender', embedUrl: 'https://www.youtube.com/embed/evS_3VIIpag?controls=0' },
+                { title: 'Abstract Concept Art 3', type: 'image', category: 'con', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Concept+Art+3', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Concept+Art+3+Large', link: 'https://www.instagram.com/p/CY2922voa2a/' },
+                { title: 'Low Poly Environment Image', type: 'image', category: '3ds', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Low+Poly+Environment', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Low+Poly+Environment+Large', link: 'https://www.artstation.com/artwork/aGd6mX' },
+                { title: 'Abstract Concept Art 4', type: 'image', category: 'con', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Concept+Art+4', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Concept+Art+4+Large', link: 'https://www.instagram.com/p/CX-aYL7ILAU/' },
+                { title: 'Sports Magazine Cover Concept', type: 'image', category: 'con', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Sports+Magazine', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Sports+Magazine+Large', link: 'https://www.behance.net/gallery/114424579/Sports-Magazine-Cover' },
                 { title: 'After Effects Motion Graphics', type: 'youtube', category: 'after', embedUrl: 'https://www.youtube.com/embed/IFYVwNlsZtc' },
+                { title: 'Abstract Concept Art 5', type: 'image', category: 'con', imgSrc: 'https://placehold.co/600x400/1F2937/FFFFFF?text=Concept+Art+5', lightboxSrc: 'https://placehold.co/1200x800/1F2937/FFFFFF?text=Concept+Art+5+Large', link: '#' },
+                { title: 'Game House Assets: Game Ready', type: 'sketchfab', category: '3ds', embedUrl: 'https://sketchfab.com/models/ff45e94fdba748ecafc68d9df0e63305/embed?camera=0&preload=1&ui_theme=dark' },
+                { title: 'After Effects VFX Breakdown', type: 'youtube', category: 'after', embedUrl: 'https://www.youtube.com/embed/-hCc9tTMfB4' },
             ];
 
             const portfolioGrid = document.getElementById('portfolio-grid');
@@ -655,7 +868,7 @@
                 portfolioGrid.innerHTML = '';
                 const filteredData = filter === 'all' 
                     ? portfolioData 
-                    : portfolioData.filter(item => item.category.includes(filter));
+                    : portfolioData.filter(item => item.category.split(' ').includes(filter)); // Corrected filtering for multiple categories
 
                 filteredData.forEach((item, index) => {
                     const itemEl = document.createElement('div');
@@ -667,7 +880,7 @@
                         content = `
                             <div class="relative rounded-xl overflow-hidden aspect-video bg-gray-900/50">
                                <img src="${item.imgSrc}" alt="${item.title}" class="w-full h-full object-cover">
-                               <div class="absolute inset-0 bg-black/70 flex items-center justify-center overlay-content">
+                               <div class="absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 overlay-content">
                                    <a class="lightbox preview text-white text-3xl mx-2 hover:text-blue-400" href="${item.lightboxSrc}"><i class="fa-solid fa-eye"></i></a>
                                    <a class="text-white text-3xl mx-2 hover:text-blue-400" target="_blank" href="${item.link}"><i class="fa-solid fa-link"></i></a>
                                </div>
@@ -675,17 +888,15 @@
                             <h3 class="text-lg font-semibold mt-4 text-white">${item.title}</h3>
                         `;
                     } else if (item.type === 'sketchfab' || item.type === 'youtube') {
-                        const embedWrapper = document.createElement('div');
-                        embedWrapper.className = 'relative aspect-video bg-gray-900/50 rounded-xl overflow-hidden';
-                        embedWrapper.innerHTML = `<iframe title="${item.title}" class="absolute top-0 left-0 w-full h-full" frameborder="0" allowfullscreen allow="autoplay; fullscreen; xr-spatial-tracking" src="${item.embedUrl}"></iframe>`;
-                        
-                        itemEl.appendChild(embedWrapper);
-                        const titleEl = document.createElement('h3');
-                        titleEl.className = 'text-lg font-semibold mt-4 text-white';
-                        titleEl.textContent = item.title;
-                        itemEl.appendChild(titleEl);
+                        // Use a consistent aspect-video for embeds
+                        content = `
+                            <div class="relative aspect-video bg-gray-900/50 rounded-xl overflow-hidden">
+                                <iframe title="${item.title}" class="absolute top-0 left-0 w-full h-full" frameborder="0" allowfullscreen allow="autoplay; fullscreen; xr-spatial-tracking; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" src="${item.embedUrl}"></iframe>
+                            </div>
+                            <h3 class="text-lg font-semibold mt-4 text-white">${item.title}</h3>
+                        `;
                     }
-                    if(content) itemEl.innerHTML = content;
+                    itemEl.innerHTML = content;
                     portfolioGrid.appendChild(itemEl);
                 });
                 
@@ -700,6 +911,74 @@
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
             document.querySelectorAll('#mobile-menu a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+            // --- START: Dynamic Age & Experience Calculation ---
+            function calculateAge() {
+                const birthDate = new Date('1993-06-22');
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const m = today.getMonth() - birthDate.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                const ageEl = document.getElementById('dynamic-age');
+                if (ageEl) {
+                    ageEl.textContent = `${age} Years`;
+                }
+            }
+
+            function calculateExperience() {
+                const today = new Date();
+
+                // 1. Fixed duration periods in total months
+                const recruitNXTMonths = 9; // Jun 2021 to Feb 2022
+                const streakByteMonths = 3; // Sep 2022 to Nov 2022
+                const fixedTotalMonths = recruitNXTMonths + streakByteMonths;
+
+                // 2. Calculate duration of the current "running" job
+                const hakimiStartDate = new Date('2023-02-01');
+                let currentJobYears = today.getFullYear() - hakimiStartDate.getFullYear();
+                let currentJobMonths = today.getMonth() - hakimiStartDate.getMonth();
+
+                // Adjust for day of the month to be more precise
+                if (today.getDate() < hakimiStartDate.getDate()) {
+                    currentJobMonths--;
+                }
+
+                if (currentJobMonths < 0) {
+                    currentJobYears--;
+                    currentJobMonths += 12;
+                }
+                const currentJobTotalMonths = (currentJobYears * 12) + currentJobMonths;
+
+                // 3. Add all durations together
+                const totalMonths = fixedTotalMonths + currentJobTotalMonths;
+
+                // 4. Convert total months to a readable format (Years & Months)
+                const totalYears = Math.floor(totalMonths / 12);
+                const remainingMonths = totalMonths % 12;
+
+                let experienceString = '';
+                if (totalYears > 0) {
+                    experienceString += `${totalYears} Year${totalYears > 1 ? 's' : ''}`;
+                }
+                if (remainingMonths > 0) {
+                    if (totalYears > 0) experienceString += ' & ';
+                    experienceString += `${remainingMonths} Month${remainingMonths > 1 ? 's' : ''}`;
+                }
+                
+                if (experienceString === '') {
+                    experienceString = 'Starting...'; // Fallback
+                }
+
+                const experienceEl = document.getElementById('dynamic-experience');
+                if (experienceEl) {
+                    experienceEl.textContent = experienceString;
+                }
+            }
+            calculateAge();
+            calculateExperience();
+            // --- END: Dynamic Age & Experience Calculation ---
 
             // Intersection Observer for Scroll Animations
             const observer = new IntersectionObserver((entries) => {
@@ -802,6 +1081,32 @@
                     </div>`;
                 showPopup(linksHtml);
             });
+
+            // Lightbox for images
+            document.body.addEventListener('click', function(e) {
+                const lightboxLink = e.target.closest('a.lightbox.preview');
+                if (lightboxLink) {
+                    e.preventDefault();
+                    const imageSrc = lightboxLink.getAttribute('href');
+                    const lightbox = document.createElement('div');
+                    lightbox.id = 'custom-lightbox';
+                    lightbox.classList.add('fixed', 'inset-0', 'bg-black', 'bg-opacity-90', 'flex', 'items-center', 'justify-center', 'z-[9999]', 'p-4');
+                    lightbox.innerHTML = `
+                        <div class="relative max-w-full max-h-full">
+                            <img src="${imageSrc}" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-xl">
+                            <button class="absolute -top-4 right-4 text-white text-4xl hover:text-blue-500 transition-colors">&times;</button>
+                        </div>
+                    `;
+                    document.body.appendChild(lightbox);
+
+                    lightbox.addEventListener('click', function(e) {
+                        if (e.target === lightbox || e.target.tagName === 'BUTTON') {
+                            lightbox.remove();
+                        }
+                    });
+                }
+            });
+
 
             // Initial Portfolio Render
             renderPortfolio();

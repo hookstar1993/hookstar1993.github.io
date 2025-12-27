@@ -2022,6 +2022,7 @@
                 Contact Form
               </h3>
               <form
+                id="contact-form"
                 action="https://formspree.io/f/xknqajww"
                 method="POST"
                 class="space-y-6 text-left"
@@ -2077,6 +2078,7 @@
                 <div>
                   <button
                     type="submit"
+                    id="form-submit-btn"
                     class="px-6 py-3 rounded-full text-sm font-semibold transition btn-primary btn-glow w-full sm:w-auto"
                   >
                     Send Message
@@ -2112,19 +2114,19 @@
                 <div class="flex items-start space-x-4">
                   <i class="fa fa-phone text-blue-400 text-2xl mt-1"></i>
                   <p>
-                    <a
-                      href="tel:919824594156"
-                      class="text-blue-400 hover:underline"
-                      >+ (91) 98245 94156</a
-                    >
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+    <!-- Success Modal (Hidden by default) -->
+    <div id="success-modal" class="popup-overlay hidden" style="z-index: 10000;">
+      <div class="popup-content glass-panel p-8 text-center max-w-sm mx-auto">
+        <div class="text-green-400 text-6xl mb-4 animate-bounce">
+          <i class="fa-solid fa-circle-check"></i>
         </div>
-      </section>
-    </main>
+        <h3 class="text-2xl font-bold text-white mb-2">Message Received!</h3>
+        <p class="text-gray-300 mb-6">Thanks for reaching out. I'll get back to you shortly.</p>
+        <button id="close-success-modal" class="px-6 py-2 rounded-full text-sm font-semibold transition btn-primary btn-glow">
+          Close
+        </button>
+      </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-transparent py-8 mt-16">
@@ -2923,6 +2925,70 @@
             });
           }
         });
+
+        // --- Contact Form Handling (AJAX) ---
+        const contactForm = document.getElementById('contact-form');
+        const successModal = document.getElementById('success-modal');
+        const closeSuccessBtn = document.getElementById('close-success-modal');
+        const submitBtn = document.getElementById('form-submit-btn');
+
+        if (contactForm) {
+          contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault(); // Stop redirection
+            
+            const originalBtnText = submitBtn.innerText;
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+            const formData = new FormData(contactForm);
+            
+            try {
+              const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                  'Accept': 'application/json'
+                }
+              });
+
+              if (response.ok) {
+                // Show Success Modal
+                successModal.classList.remove('hidden');
+                // Small delay to allow display:block to apply before opacity transition
+                requestAnimationFrame(() => {
+                  successModal.classList.add('visible');
+                });
+                
+                contactForm.reset(); // Clear the form
+              } else {
+                alert("Oops! There was a problem submitting your form. Please try again.");
+              }
+            } catch (error) {
+              alert("Oops! There was a network error. Please check your connection.");
+            } finally {
+              // Reset button
+              submitBtn.disabled = false;
+              submitBtn.innerText = originalBtnText;
+            }
+          });
+        }
+
+        // Close Success Modal Logic
+        if (closeSuccessBtn && successModal) {
+          const closeFn = () => {
+              successModal.classList.remove('visible');
+              setTimeout(() => {
+                  successModal.classList.add('hidden');
+              }, 300); // Wait for transition to finish
+          };
+          
+          closeSuccessBtn.addEventListener('click', closeFn);
+          successModal.addEventListener('click', (e) => {
+              if (e.target === successModal) closeFn();
+          });
+        }
 
         // Initial Portfolio Render
         renderPortfolio();

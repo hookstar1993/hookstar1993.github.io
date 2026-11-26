@@ -92,11 +92,11 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts: Inter & Space Grotesk -->
+    <!-- Google Fonts: Inter & Manrope -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
 
@@ -116,1062 +116,187 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
-      /* =========================================================
-         1. LIQUIFIED GLASS UI DESIGN TOKENS (DARK & LIGHT THEMES)
-         ========================================================= */
+      /* ============ 1. DESIGN TOKENS: graphite + one warm accent ============ */
       :root {
-        --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 48%, #06b6d4 100%);
-        --secondary-gradient: linear-gradient(135deg, #ec4899 0%, #f43f5e 50%, #f97316 100%);
-        --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #2dd4bf 100%);
-        --bg-primary: #040712;
-        --bg-secondary: #0a1024;
-        --bg-tertiary: #111936;
-        --text-primary: #f8fafc;
-        --text-secondary: #cbd5e1;
-        --text-muted: #94a3b8;
-        --text-light: #e2e8f0;
-
-        /* Liquid Glass Surfaces */
-        --liquid-bg: linear-gradient(
-          140deg,
-          rgba(255, 255, 255, 0.11) 0%,
-          rgba(255, 255, 255, 0.04) 52%,
-          rgba(99, 102, 241, 0.09) 100%
-        );
-        --liquid-bg-strong: rgba(8, 13, 30, 0.72);
-        --liquid-border: rgba(255, 255, 255, 0.18);
-        --liquid-highlight: rgba(255, 255, 255, 0.42);
-        --liquid-shadow: 0 20px 50px -14px rgba(0, 0, 0, 0.7),
-          inset 0 1px 1px rgba(255, 255, 255, 0.34),
-          inset 0 -1px 1px rgba(255, 255, 255, 0.06);
-        --liquid-hover-shadow: 0 28px 64px -14px rgba(56, 189, 248, 0.28),
-          inset 0 1px 2px rgba(255, 255, 255, 0.55),
-          inset 0 -1px 1px rgba(99, 102, 241, 0.28);
-        --input-bg: rgba(255, 255, 255, 0.06);
-        --pill-bg: rgba(255, 255, 255, 0.08);
-        --chip-bg: rgba(255, 255, 255, 0.07);
-        --spotlight-color: rgba(56, 189, 248, 0.16);
-        --keycap-top: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
-        --keycap-lip: rgba(15, 23, 42, 0.92);
+        --accent: #f2a65a; --accent-strong: #ffbd7a; --on-accent: #1a1108;
+        --accent-soft: rgba(242,166,90,.10); --accent-line: rgba(242,166,90,.34);
+        --bg-primary: #0b0c0f; --surface: #121419; --surface-2: #181b21;
+        --text-primary: #f2f1ee; --text-secondary: #bcbfc6; --text-muted: #90949e; --text-light: #dedfe2;
+        --line: rgba(255,255,255,.085); --line-strong: rgba(255,255,255,.17);
+        --header-bg: rgba(11,12,15,.84); --shadow: 0 24px 48px -28px rgba(0,0,0,.8);
+        --canvas-opacity: .5;
+        /* names used by inline styles in the markup */
+        --primary-gradient: linear-gradient(135deg, #ffcb94, #f2a65a);
+        --accent-gradient: var(--primary-gradient);
+        --liquid-border: var(--line); --liquid-bg-strong: var(--header-bg);
+        --input-bg: var(--surface-2); --pill-bg: var(--surface-2);
+        color-scheme: dark;
       }
-
       [data-theme="light"] {
-        --primary-gradient: linear-gradient(135deg, #2563eb 0%, #6366f1 50%, #0891b2 100%);
-        --secondary-gradient: linear-gradient(135deg, #db2777 0%, #e11d48 55%, #ea580c 100%);
-        --accent-gradient: linear-gradient(135deg, #0284c7 0%, #6366f1 50%, #0d9488 100%);
-        --bg-primary: #edf3fc;
-        --bg-secondary: #f8fbff;
-        --bg-tertiary: #e0ebf9;
-        --text-primary: #0f172a;
-        --text-secondary: #334155;
-        --text-muted: #475569;
-        --text-light: #1e293b;
-
-        --liquid-bg: linear-gradient(
-          140deg,
-          rgba(255, 255, 255, 0.84) 0%,
-          rgba(255, 255, 255, 0.56) 55%,
-          rgba(224, 242, 254, 0.62) 100%
-        );
-        --liquid-bg-strong: rgba(255, 255, 255, 0.82);
-        --liquid-border: rgba(255, 255, 255, 0.92);
-        --liquid-highlight: rgba(255, 255, 255, 1);
-        --liquid-shadow: 0 18px 42px -14px rgba(15, 23, 42, 0.14),
-          inset 0 1px 2px rgba(255, 255, 255, 0.96),
-          inset 0 -1px 1px rgba(148, 163, 184, 0.25);
-        --liquid-hover-shadow: 0 26px 56px -12px rgba(37, 99, 235, 0.22),
-          inset 0 1px 2px rgba(255, 255, 255, 1),
-          inset 0 -1px 1px rgba(56, 189, 248, 0.35);
-        --input-bg: rgba(255, 255, 255, 0.78);
-        --pill-bg: rgba(255, 255, 255, 0.78);
-        --chip-bg: rgba(255, 255, 255, 0.72);
-        --spotlight-color: rgba(37, 99, 235, 0.14);
-        --keycap-top: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(226, 232, 240, 0.75));
-        --keycap-lip: rgba(148, 163, 184, 0.68);
+        --accent: #a9540c; --accent-strong: #8a4307; --on-accent: #ffffff;
+        --accent-soft: rgba(169,84,12,.08); --accent-line: rgba(169,84,12,.3);
+        --bg-primary: #f6f4f0; --surface: #ffffff; --surface-2: #f2efea;
+        --text-primary: #16171a; --text-secondary: #43464d; --text-muted: #62666f; --text-light: #26282c;
+        --line: rgba(20,20,25,.10); --line-strong: rgba(20,20,25,.22);
+        --header-bg: rgba(246,244,240,.88); --shadow: 0 24px 44px -30px rgba(40,30,15,.3);
+        --canvas-opacity: .38;
+        --primary-gradient: linear-gradient(135deg, #b85f14, #8a4307);
+        --accent-gradient: var(--primary-gradient);
+        --liquid-border: var(--line); --liquid-bg-strong: var(--header-bg);
+        --input-bg: var(--surface-2); --pill-bg: var(--surface-2);
+        color-scheme: light;
       }
 
-      /* =========================================================
-         2. BASE LAYOUT & STICKY-SAFE OVERFLOW (overflow-x: clip)
-         ========================================================= */
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-        overflow-x: clip;
-      }
-
+      /* ============ 2. BASE ============ */
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; overflow-x: clip; scroll-padding-top: 84px; }
       body {
-        font-family: "Inter", sans-serif;
-        background: radial-gradient(
-            circle at 12% 14%,
-            var(--bg-tertiary) 0%,
-            transparent 48%
-          ),
-          linear-gradient(
-            160deg,
-            var(--bg-primary) 0%,
-            var(--bg-secondary) 55%,
-            var(--bg-tertiary) 100%
-          );
-        color: var(--text-primary);
-        overflow-x: clip;
-        min-height: 100vh;
-        transition: background 0.45s ease, color 0.35s ease;
+        font-family: "Inter", system-ui, sans-serif; background: var(--bg-primary);
+        color: var(--text-primary); overflow-x: clip; min-height: 100vh;
+        -webkit-font-smoothing: antialiased; transition: background-color .35s ease, color .35s ease;
       }
+      h1,h2,h3,h4,h5,h6 { font-family: "Manrope", "Inter", sans-serif; letter-spacing: -.018em; }
+      ::selection { background: var(--accent); color: var(--on-accent); }
+      a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+      #three-bg { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; opacity: var(--canvas-opacity); }
+      #three-bg { transition: opacity .6s ease; }
+      .past-hero #three-bg { opacity: calc(var(--canvas-opacity) * .3); }
+      @media (max-width: 1023px) { :root { --canvas-opacity: .28; } [data-theme="light"] { --canvas-opacity: .22; } }
+      .liquid-blobs, .orbital-ring { display: none; }
+      #scroll-progress { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: var(--accent); z-index: 100; }
+      body .text-sky-400, body .hover\:text-sky-400:hover, body .hover\:text-pink-400:hover { color: var(--accent); }
 
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-family: "Space Grotesk", sans-serif;
-      }
-
-      /* Fixed Full-Screen Three.js 3D WebGL Canvas */
-      #three-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: -1;
-        pointer-events: none;
-        display: block;
-      }
-
-      /* Morphing Liquid Aurora Blobs (CSS fallback & color depth behind WebGL) */
-      .liquid-blobs {
-        position: fixed;
-        inset: 0;
-        z-index: -2;
-        overflow: hidden;
-        pointer-events: none;
-      }
-
-      .blob {
-        position: absolute;
-        filter: blur(115px);
-        opacity: 0.36;
-        animation: morphBlob 24s ease-in-out infinite alternate;
-      }
-
-      [data-theme="light"] .blob {
-        opacity: 0.26;
-      }
-
-      .blob-1 {
-        width: 580px;
-        height: 580px;
-        top: -150px;
-        left: -130px;
-        background: radial-gradient(circle, #6366f1 0%, #3b82f6 60%, transparent 100%);
-      }
-
-      .blob-2 {
-        width: 540px;
-        height: 540px;
-        bottom: -160px;
-        right: -110px;
-        background: radial-gradient(circle, #ec4899 0%, #8b5cf6 60%, transparent 100%);
-        animation-duration: 28s;
-        animation-delay: -5s;
-      }
-
-      .blob-3 {
-        width: 440px;
-        height: 440px;
-        top: 40%;
-        left: 48%;
-        background: radial-gradient(circle, #06b6d4 0%, #2dd4bf 60%, transparent 100%);
-        animation-duration: 26s;
-        animation-delay: -10s;
-      }
-
-      @keyframes morphBlob {
-        0% {
-          border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%;
-          transform: translate(0, 0) scale(1) rotate(0deg);
-        }
-        50% {
-          border-radius: 64% 36% 42% 58% / 58% 62% 38% 42%;
-          transform: translate(60px, -40px) scale(1.12) rotate(120deg);
-        }
-        100% {
-          border-radius: 38% 62% 55% 45% / 40% 58% 42% 60%;
-          transform: translate(-40px, 45px) scale(0.92) rotate(240deg);
-        }
-      }
-
-      /* Top Scroll Progress Bar */
-      #scroll-progress {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 3px;
-        width: 0%;
-        background: var(--primary-gradient);
-        z-index: 100;
-        box-shadow: 0 0 14px rgba(56, 189, 248, 0.85);
-      }
-
-      /* =========================================================
-         3. LIQUIFIED GLASS PANELS & 3D TILT CARDS (ALWAYS VISIBLE)
-         ========================================================= */
+      /* ============ 3. SURFACES, HEADER, HEADINGS ============ */
       .liquid-glass {
-        background: var(--liquid-bg);
-        -webkit-backdrop-filter: blur(26px) saturate(185%);
-        backdrop-filter: blur(26px) saturate(185%);
-        border-radius: 1.75rem;
-        border: 1px solid var(--liquid-border);
-        box-shadow: var(--liquid-shadow);
-        position: relative;
-        overflow: hidden;
-        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-          box-shadow 0.35s ease,
-          border-color 0.35s ease;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 1.125rem;
+        box-shadow: var(--shadow); position: relative; overflow: hidden;
+        transition: border-color .25s ease;
       }
+      .liquid-glass:hover { border-color: var(--line-strong); }
+      .liquid-glass > * { position: relative; }
+      #header { background: var(--header-bg); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
+      #header nav > a:not(.btn-3d) { color: var(--text-secondary); font-weight: 500; transition: color .2s; }
+      #header nav > a:not(.btn-3d):hover { color: var(--text-primary); }
+      .brand-mark { font-family: "Manrope", sans-serif; font-weight: 800; letter-spacing: .06em; }
 
-      .liquid-glass::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 8%;
-        right: 8%;
-        height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent 0%,
-          var(--liquid-highlight) 50%,
-          transparent 100%
-        );
-        pointer-events: none;
-        z-index: 2;
-      }
+      .section-heading { font-size: clamp(2rem, 4.2vw, 3rem); font-weight: 800; line-height: 1.12; color: var(--text-primary); }
+      .section-heading::before { content: ""; display: block; width: 40px; height: 3px; margin-bottom: 1.1rem; background: var(--accent); }
+      main section > .text-center:first-child, #portfolios > div { text-align: left; }
+      main section > .text-center:first-child > p, #portfolios > div > p { margin-left: 0; margin-top: 1rem; }
+      #software-filters, #portfolios > div > div.flex { justify-content: flex-start; }
+      #plus-points .text-center { text-align: left; }
 
-      .liquid-glass::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(
-          420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-          var(--spotlight-color),
-          transparent 55%
-        );
-        opacity: 0;
-        transition: opacity 0.35s ease;
-        pointer-events: none;
-        z-index: 1;
-      }
-
-      .liquid-glass:hover::after {
-        opacity: 1;
-      }
-
-      .liquid-glass:hover {
-        box-shadow: var(--liquid-hover-shadow);
-        border-color: rgba(56, 189, 248, 0.45);
-      }
-
-      .liquid-glass > * {
-        position: relative;
-        z-index: 3;
-      }
-
-      .tilt-card {
-        transform-style: preserve-3d;
-        will-change: transform;
-      }
-
-      /* Header */
-      #header {
-        background: var(--liquid-bg-strong);
-        -webkit-backdrop-filter: blur(28px) saturate(190%);
-        backdrop-filter: blur(28px) saturate(190%);
-        border-bottom: 1px solid var(--liquid-border);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-      }
-
-      /* Section Headings */
-      .section-heading {
-        font-family: "Space Grotesk", sans-serif;
-        font-size: clamp(1.85rem, 5vw, 3.25rem);
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        display: inline-block;
-        position: relative;
-        background: var(--primary-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      .section-heading::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: -12px;
-        transform: translateX(-50%);
-        width: 72%;
-        height: 3px;
-        border-radius: 999px;
-        background: var(--accent-gradient);
-        box-shadow: 0 0 14px rgba(56, 189, 248, 0.65);
-      }
-
-      /* =========================================================
-         4. TACTILE 3D CTA BUTTONS & 3D GLASS KEYCAP SOCIAL BUTTONS
-         ========================================================= */
+      /* ============ 4. BUTTONS & SOCIAL LINKS ============ */
       .btn-3d {
-        position: relative;
-        overflow: hidden;
-        border-radius: 9999px;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        border: 1px solid rgba(255, 255, 255, 0.32);
-        transform: translateY(0);
-        transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-          box-shadow 0.22s ease,
-          filter 0.22s ease;
-        cursor: pointer;
-        user-select: none;
+        display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+        border-radius: .65rem; font-weight: 600; letter-spacing: .01em; text-transform: none;
+        font-size: .875rem; border: 1px solid transparent; cursor: pointer; user-select: none;
+        transition: background-color .2s, border-color .2s, color .2s, transform .2s;
       }
-
-      .btn-3d::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 12%;
-        right: 12%;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
-      }
-
-      .btn-3d::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -130%;
-        width: 65%;
-        height: 100%;
-        background: linear-gradient(
-          115deg,
-          transparent 0%,
-          rgba(255, 255, 255, 0.32) 50%,
-          transparent 100%
-        );
-        transition: left 0.65s ease;
-        pointer-events: none;
-      }
-
-      .btn-3d:hover::after {
-        left: 145%;
-      }
-
-      .btn-primary-3d {
-        background: var(--primary-gradient);
-        color: #ffffff;
-        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.55),
-          0 5px 0 #312e81,
-          0 12px 26px -4px rgba(99, 102, 241, 0.55);
-      }
-
-      .btn-primary-3d:hover {
-        transform: translateY(-3px) scale(1.02);
-        box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.7),
-          0 8px 0 #312e81,
-          0 18px 34px -4px rgba(56, 189, 248, 0.65);
-      }
-
-      .btn-primary-3d:active {
-        transform: translateY(3px) scale(0.99);
-        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.45),
-          0 2px 0 #312e81,
-          0 6px 14px -2px rgba(99, 102, 241, 0.45);
-      }
-
-      .btn-secondary-3d {
-        background: var(--secondary-gradient);
-        color: #ffffff;
-        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.55),
-          0 5px 0 #881337,
-          0 12px 26px -4px rgba(236, 72, 153, 0.55);
-      }
-
-      .btn-secondary-3d:hover {
-        transform: translateY(-3px) scale(1.02);
-        box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.7),
-          0 8px 0 #881337,
-          0 18px 34px -4px rgba(244, 63, 94, 0.65);
-      }
-
-      .btn-secondary-3d:active {
-        transform: translateY(3px) scale(0.99);
-        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.45),
-          0 2px 0 #881337,
-          0 6px 14px -2px rgba(236, 72, 153, 0.45);
-      }
-
-      /* 3D Glass Keycap Social Media Buttons */
-      .social-3d-wrap {
-        perspective: 700px;
-      }
+      .btn-3d:hover { transform: translateY(-1px); }
+      .btn-3d:disabled { opacity: .65; cursor: wait; }
+      .btn-primary-3d { background: var(--accent); color: var(--on-accent); }
+      .btn-primary-3d:hover { background: var(--accent-strong); }
+      .btn-secondary-3d { background: transparent; color: var(--text-primary); border-color: var(--line-strong); }
+      .btn-secondary-3d:hover { border-color: var(--accent); color: var(--accent); }
 
       .social-keycap {
-        --brand-color: #38bdf8;
-        --brand-glow: rgba(56, 189, 248, 0.55);
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 50px;
-        height: 50px;
-        border-radius: 16px;
-        background: var(--keycap-top);
-        -webkit-backdrop-filter: blur(18px) saturate(180%);
-        backdrop-filter: blur(18px) saturate(180%);
-        border: 1px solid var(--liquid-border);
-        color: var(--text-primary);
-        font-size: 1.18rem;
-        transform-style: preserve-3d;
-        box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.6),
-          inset 0 -2px 3px rgba(0, 0, 0, 0.18),
-          0 5px 0 var(--keycap-lip),
-          0 10px 20px rgba(0, 0, 0, 0.32);
-        transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-          box-shadow 0.25s ease,
-          border-color 0.25s ease,
-          color 0.25s ease;
+        display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px;
+        border-radius: 50%; border: 1px solid var(--line); color: var(--text-secondary); font-size: 1rem;
+        transition: color .2s, border-color .2s, background-color .2s, transform .2s;
       }
+      .social-keycap:hover { color: var(--accent); border-color: var(--accent-line); background: var(--accent-soft); transform: translateY(-2px); }
 
-      .social-keycap i {
-        transform: translateZ(10px);
-        transition: transform 0.25s ease, filter 0.25s ease;
-      }
-
-      .social-keycap::before {
-        content: "";
-        position: absolute;
-        inset: -2px;
-        border-radius: 17px;
-        background: radial-gradient(circle at 50% 0%, var(--brand-glow), transparent 72%);
-        opacity: 0;
-        transition: opacity 0.25s ease;
-        pointer-events: none;
-      }
-
-      .social-keycap:hover {
-        transform: translateY(-6px) rotateX(10deg) scale(1.08);
-        color: var(--brand-color);
-        border-color: var(--brand-color);
-        box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8),
-          0 8px 0 var(--keycap-lip),
-          0 0 0 2px var(--brand-glow),
-          0 16px 30px -4px var(--brand-glow);
-      }
-
-      .social-keycap:hover::before {
-        opacity: 0.45;
-      }
-
-      .social-keycap:hover i {
-        transform: translateZ(16px) scale(1.1);
-        filter: drop-shadow(0 0 8px var(--brand-glow));
-      }
-
-      .social-keycap:active {
-        transform: translateY(2px) scale(0.97);
-        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5),
-          0 2px 0 var(--keycap-lip),
-          0 4px 12px var(--brand-glow);
-      }
-
-      /* Brand Neon Underglow Tokens */
-      .brand-fb { --brand-color: #1877F2; --brand-glow: rgba(24, 119, 242, 0.6); }
-      .brand-tw { --brand-color: #1DA1F2; --brand-glow: rgba(29, 161, 242, 0.6); }
-      .brand-ig { --brand-color: #E1306C; --brand-glow: rgba(225, 48, 108, 0.6); }
-      .brand-li { --brand-color: #0A66C2; --brand-glow: rgba(10, 102, 194, 0.6); }
-      .brand-gh { --brand-color: #a855f7; --brand-glow: rgba(168, 85, 247, 0.6); }
-      .brand-yt { --brand-color: #FF0000; --brand-glow: rgba(255, 0, 0, 0.6); }
-      .brand-be { --brand-color: #1769FF; --brand-glow: rgba(23, 105, 255, 0.6); }
-      .brand-sf { --brand-color: #f97316; --brand-glow: rgba(249, 115, 22, 0.6); }
-      .brand-as { --brand-color: #13AFF0; --brand-glow: rgba(19, 175, 240, 0.6); }
-
-      /* =========================================================
-         5. PREMIUM 3D CERTIFICATE & WORK BUTTONS IN MY JOURNEY
-         ========================================================= */
       .btn-cert-3d {
-        position: relative;
-        overflow: hidden;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.65rem;
-        padding: 0.55rem 1.05rem 0.55rem 0.6rem;
-        border-radius: 14px;
-        font-size: 0.78rem;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-        color: #ecfdf5;
-        background: linear-gradient(135deg, rgba(16, 185, 129, 0.88) 0%, rgba(6, 182, 212, 0.9) 100%);
-        border: 1px solid rgba(167, 243, 208, 0.55);
-        box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.65),
-          0 4px 0 #065f46,
-          0 10px 22px -4px rgba(16, 185, 129, 0.5);
-        transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-          box-shadow 0.22s ease;
-      }
-
-      .btn-cert-3d::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -130%;
-        width: 60%;
-        height: 100%;
-        background: linear-gradient(
-          115deg,
-          transparent 0%,
-          rgba(255, 255, 255, 0.42) 50%,
-          transparent 100%
-        );
-        animation: certShimmer 3.8s infinite ease-in-out;
-        pointer-events: none;
-      }
-
-      @keyframes certShimmer {
-        0%, 60% { left: -130%; }
-        100% { left: 160%; }
-      }
-
-      .btn-cert-3d:hover {
-        transform: translateY(-3px) scale(1.02);
-        box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.85),
-          0 7px 0 #065f46,
-          0 16px 28px -4px rgba(6, 182, 212, 0.6);
-      }
-
-      .btn-cert-3d:active {
-        transform: translateY(2px);
-        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5),
-          0 2px 0 #065f46,
-          0 5px 12px rgba(16, 185, 129, 0.4);
-      }
-
-      .btn-cert-3d .cert-icon-box {
-        width: 28px;
-        height: 28px;
-        border-radius: 9px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(255, 255, 255, 0.22);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6);
-        font-size: 0.85rem;
-      }
-
-      .btn-cert-3d .cert-arrow {
-        transition: transform 0.25s ease;
-      }
-
-      .btn-cert-3d:hover .cert-arrow {
-        transform: translate(3px, -3px);
-      }
-
-      /* Cyan/Indigo Variant for Live 3D Works */
-      .btn-work-3d {
-        background: linear-gradient(135deg, rgba(14, 165, 233, 0.92) 0%, rgba(99, 102, 241, 0.92) 100%);
-        border-color: rgba(186, 230, 253, 0.6);
-        box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.65),
-          0 4px 0 #1e3a8a,
-          0 10px 22px -4px rgba(14, 165, 233, 0.55);
-      }
-
-      .btn-work-3d:hover {
-        box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.85),
-          0 7px 0 #1e3a8a,
-          0 16px 28px -4px rgba(99, 102, 241, 0.65);
-      }
-
-      .btn-work-3d:active {
-        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5),
-          0 2px 0 #1e3a8a,
-          0 5px 12px rgba(14, 165, 233, 0.4);
-      }
-
-      /* =========================================================
-         6. UPGRADED PINNED 3D STAGE: SCROLL-SYNCED CREATIVE VISION
-         ========================================================= */
-      .manifesto-runway {
-        position: relative;
-        min-height: 150vh;
-      }
-
-      @media (min-width: 1024px) {
-        .manifesto-runway {
-          min-height: 195vh;
-        }
-      }
-
-      .manifesto-sticky {
-        position: sticky;
-        top: 13vh;
-        padding: 1rem 0;
-        perspective: 1200px;
-      }
-
-      .manifesto-stage-card {
-        transform-style: preserve-3d;
-        will-change: transform;
-        transition: transform 0.14s ease-out;
-      }
-
-      /* Counter-Rotating 3D Orbital Rings Behind Manifesto Glass Stage */
-      .orbital-ring {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 0;
-      }
-
-      .orbital-ring-1 {
-        width: min(82vw, 560px);
-        height: min(82vw, 560px);
-        margin-left: calc(min(82vw, 560px) / -2);
-        margin-top: calc(min(82vw, 560px) / -2);
-        border: 2px dashed rgba(56, 189, 248, 0.34);
-        box-shadow: 0 0 38px rgba(56, 189, 248, 0.14), inset 0 0 24px rgba(99, 102, 241, 0.12);
-        animation: orbitSpinCW 26s linear infinite;
-      }
-
-      .orbital-ring-2 {
-        width: min(68vw, 440px);
-        height: min(68vw, 440px);
-        margin-left: calc(min(68vw, 440px) / -2);
-        margin-top: calc(min(68vw, 440px) / -2);
-        border: 1.5px solid rgba(236, 72, 153, 0.28);
-        box-shadow: 0 0 32px rgba(236, 72, 153, 0.14);
-        animation: orbitSpinCCW 19s linear infinite;
-      }
-
-      @keyframes orbitSpinCW {
-        from { transform: rotateX(68deg) rotateY(14deg) rotateZ(0deg); }
-        to { transform: rotateX(68deg) rotateY(14deg) rotateZ(360deg); }
-      }
-
-      @keyframes orbitSpinCCW {
-        from { transform: rotateX(62deg) rotateY(-18deg) rotateZ(360deg); }
-        to { transform: rotateX(62deg) rotateY(-18deg) rotateZ(0deg); }
-      }
-
-      .manifesto-word {
-        display: inline-block;
-        opacity: 0.28;
-        transform: translateY(4px);
-        transition: opacity 0.22s ease, transform 0.26s ease, filter 0.25s ease;
-        margin-right: 0.26em;
-      }
-
-      .manifesto-word.lit {
-        opacity: 1;
-        transform: translateY(0);
-        text-shadow: 0 0 22px rgba(255, 255, 255, 0.2);
-      }
-
-      .manifesto-word.lit-accent {
-        opacity: 1;
-        transform: translateY(0);
-        background: linear-gradient(135deg, #38bdf8 0%, #a78bfa 50%, #f472b6 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.35));
-      }
-
-      .floating-micro-badge {
-        background: var(--liquid-bg-strong);
-        -webkit-backdrop-filter: blur(18px) saturate(180%);
-        backdrop-filter: blur(18px) saturate(180%);
-        border: 1px solid var(--liquid-border);
-        box-shadow: var(--liquid-shadow);
-        will-change: transform;
-      }
-
-      /* =========================================================
-         7. SOFTWARE ABILITIES: 3D PEDESTAL, PROGRESS BARS & CHIPS
-         ========================================================= */
-      .icon-pedestal-3d {
-        width: 60px;
-        height: 60px;
-        border-radius: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--keycap-top);
-        border: 1px solid var(--liquid-border);
-        box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.55),
-          0 5px 0 var(--keycap-lip),
-          0 12px 22px rgba(0, 0, 0, 0.28);
-        flex-shrink: 0;
-        transition: transform 0.28s ease;
-      }
-
-      .software-card:hover .icon-pedestal-3d {
-        transform: translateY(-4px) rotateX(10deg) scale(1.06);
-      }
-
-      .liquid-progress-track {
-        width: 100%;
-        height: 9px;
-        border-radius: 999px;
-        background: rgba(148, 163, 184, 0.2);
-        border: 1px solid var(--liquid-border);
-        overflow: hidden;
-        position: relative;
-      }
-
-      .liquid-progress-fill {
-        height: 100%;
-        border-radius: 999px;
-        background: var(--primary-gradient);
-        box-shadow: 0 0 14px rgba(56, 189, 248, 0.65);
-        position: relative;
-        transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
-      }
-
-      .liquid-progress-fill::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          90deg,
-          transparent 0%,
-          rgba(255, 255, 255, 0.45) 50%,
-          transparent 100%
-        );
-        animation: barShimmer 2.4s infinite linear;
-      }
-
-      @keyframes barShimmer {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(100%); }
-      }
-
-      .skill-chip-3d {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.3rem 0.68rem;
-        border-radius: 10px;
-        font-size: 0.72rem;
-        font-weight: 600;
-        color: var(--text-secondary);
-        background: var(--chip-bg);
-        border: 1px solid var(--liquid-border);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 2px 6px rgba(0, 0, 0, 0.12);
-        transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-      }
-
-      .skill-chip-3d:hover {
-        transform: translateY(-2px);
-        border-color: rgba(56, 189, 248, 0.6);
-        color: var(--text-primary);
-      }
-
-      /* =========================================================
-         8. PINNED STICKY STACKING CARDS, TIMELINE & DEPTH RAIL
-         ========================================================= */
-      .stack-card {
-        position: sticky;
-        top: calc(78px + var(--card-index, 0) * 14px);
-        transform-origin: center top;
-        will-change: transform, filter;
-        transition: box-shadow 0.35s ease, border-color 0.35s ease;
-      }
-
-      @media (min-width: 1024px) {
-        .stack-card {
-          top: calc(108px + var(--card-index, 0) * 22px);
-        }
-      }
-
-      .stack-step-pill {
-        transition: all 0.28s ease;
-        border: 1px solid var(--liquid-border);
-        background: var(--pill-bg);
-        color: var(--text-muted);
-      }
-
-      .stack-step-pill.active {
-        background: var(--primary-gradient);
-        color: #ffffff;
-        border-color: rgba(255, 255, 255, 0.4);
-        box-shadow: 0 8px 22px rgba(99, 102, 241, 0.42);
-      }
-
-      .sticky-resume-header {
-        position: sticky;
-        top: 76px;
-        z-index: 20;
-        background: var(--liquid-bg-strong);
-        -webkit-backdrop-filter: blur(22px) saturate(180%);
-        backdrop-filter: blur(22px) saturate(180%);
-        border: 1px solid var(--liquid-border);
-        border-radius: 1.25rem;
-        padding: 0.85rem 1.25rem;
-        box-shadow: var(--liquid-shadow);
-      }
-
-      .timeline-rail {
-        position: relative;
-        padding-left: 1.75rem;
-      }
-
-      .timeline-rail::before {
-        content: "";
-        position: absolute;
-        left: 0.45rem;
-        top: 0.5rem;
-        bottom: 0.5rem;
-        width: 2px;
-        background: linear-gradient(
-          180deg,
-          rgba(56, 189, 248, 0.9) 0%,
-          rgba(139, 92, 246, 0.72) 55%,
-          rgba(236, 72, 153, 0.45) 100%
-        );
-        border-radius: 999px;
-      }
-
-      .timeline-item {
-        position: relative;
-      }
-
-      .timeline-item::before {
-        content: "";
-        position: absolute;
-        left: -1.58rem;
-        top: 1.6rem;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: var(--accent-gradient);
-        box-shadow: 0 0 12px rgba(56, 189, 248, 0.85);
-        border: 2px solid var(--bg-primary);
-      }
-
-      /* Vertical 3D Scroll Depth Indicator (Desktop) */
-      .depth-indicator {
-        position: fixed;
-        right: 18px;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 40;
-        padding: 0.85rem 0.55rem;
-        border-radius: 9999px;
-        background: var(--liquid-bg-strong);
-        -webkit-backdrop-filter: blur(20px);
-        backdrop-filter: blur(20px);
-        border: 1px solid var(--liquid-border);
-        box-shadow: var(--liquid-shadow);
-      }
-
-      .depth-dot {
-        width: 9px;
-        height: 9px;
-        border-radius: 50%;
-        background: rgba(148, 163, 184, 0.45);
-        transition: all 0.25s ease;
-      }
-
-      .depth-dot.active {
-        width: 11px;
-        height: 22px;
-        border-radius: 9999px;
-        background: var(--accent-gradient);
-        box-shadow: 0 0 12px rgba(56, 189, 248, 0.85);
-      }
-
-      /* Filter Pill Buttons (Portfolio & Software Abilities) */
-      .filter-pill-3d {
-        background: var(--pill-bg);
-        -webkit-backdrop-filter: blur(14px);
-        backdrop-filter: blur(14px);
-        border: 1px solid var(--liquid-border);
-        color: var(--text-primary);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 4px 0 var(--keycap-lip);
-        transition: all 0.22s ease;
-        cursor: pointer;
-      }
-
-      .filter-pill-3d:hover:not(.active) {
-        transform: translateY(-2px);
-        border-color: rgba(56, 189, 248, 0.6);
-      }
-
-      .filter-pill-3d.active {
-        background: var(--primary-gradient);
-        color: #ffffff;
-        border-color: rgba(255, 255, 255, 0.4);
-        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.55),
-          0 4px 0 #312e81,
-          0 10px 22px rgba(99, 102, 241, 0.45);
-      }
-
-      .filter-pill-3d:active {
-        transform: translateY(2px);
-      }
-
-      /* Role Pills & Plus Badges */
-      .role-pill {
-        background: var(--pill-bg);
-        -webkit-backdrop-filter: blur(16px) saturate(160%);
-        backdrop-filter: blur(16px) saturate(160%);
-        border: 1px solid var(--liquid-border);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        color: var(--text-primary);
-      }
-
-      .plus-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        padding: 0.3rem 0.78rem;
-        border-radius: 9999px;
-        font-size: 0.68rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(139, 92, 246, 0.28));
-        border: 1px solid rgba(56, 189, 248, 0.48);
-        color: #38bdf8;
-        box-shadow: 0 0 18px rgba(56, 189, 248, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-      }
-
-      [data-theme="light"] .plus-badge {
-        background: linear-gradient(135deg, rgba(37, 99, 235, 0.14), rgba(14, 165, 233, 0.18));
-        color: #0284c7;
-        border-color: rgba(2, 132, 199, 0.4);
-      }
-
-      /* Header Theme Toggle Button */
-      .theme-toggle-btn {
-        width: 44px;
-        height: 44px;
-        border-radius: 14px;
-        background: var(--keycap-top);
-        -webkit-backdrop-filter: blur(16px) saturate(180%);
-        backdrop-filter: blur(16px) saturate(180%);
-        border: 1px solid var(--liquid-border);
-        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 3px 0 var(--keycap-lip);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-        flex-shrink: 0;
-      }
-
-      .theme-toggle-btn:hover {
-        transform: translateY(-2px) rotate(12deg);
-        border-color: rgba(56, 189, 248, 0.65);
-      }
-
-      .theme-toggle-btn:active {
-        transform: translateY(2px);
-      }
-
-      .theme-toggle-btn i {
-        font-size: 17px;
-        color: var(--text-primary);
-      }
-
-      /* Popup / Modal Overlay */
-      .popup-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(2, 6, 23, 0.82);
-        -webkit-backdrop-filter: blur(14px);
-        backdrop-filter: blur(14px);
-        z-index: 9998;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: opacity 0.28s ease;
-        padding: 1rem;
-      }
-
-      .popup-overlay.visible {
-        opacity: 1;
-      }
-
-      .popup-content {
-        position: relative;
-        max-width: 920px;
-        width: 100%;
-        transform: scale(0.95);
-        transition: transform 0.28s ease;
-      }
-
-      .popup-overlay.visible .popup-content {
-        transform: scale(1);
-      }
-
-      .popup-video-container {
-        position: relative;
-        padding-bottom: 56.25%;
-        height: 0;
-      }
-
-      .popup-video-container iframe {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-      }
-
-      .popup-close-btn {
-        position: absolute;
-        top: -44px;
-        right: 0;
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.14);
-        border: 1px solid rgba(255, 255, 255, 0.35);
-        color: #ffffff;
-        font-size: 1.5rem;
-        line-height: 1;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: transform 0.2s ease, background 0.2s ease;
-      }
-
-      .popup-close-btn:hover {
-        transform: scale(1.12);
-        background: rgba(239, 68, 68, 0.85);
-      }
-
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: rgba(15, 23, 42, 0.35);
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: var(--primary-gradient);
-        border-radius: 999px;
-      }
+        display: inline-flex; align-items: center; gap: .55rem; padding: .5rem .85rem; border-radius: .55rem;
+        font-size: .78rem; font-weight: 600; color: var(--text-primary); border: 1px solid var(--line-strong);
+        transition: border-color .2s, color .2s, background-color .2s;
+      }
+      .btn-cert-3d:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+      .btn-cert-3d .cert-icon-box { color: var(--accent); display: inline-flex; }
+      .btn-cert-3d .cert-arrow { opacity: .6; transition: transform .2s; }
+      .btn-cert-3d:hover .cert-arrow { transform: translate(2px,-2px); }
+
+      /* ============ 5. HERO ============ */
+      .hero-kicker { display: inline-flex; align-items: center; gap: .6rem; font-size: .8rem; font-weight: 500; color: var(--text-secondary); padding: .45rem .9rem; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface); }
+      .hero-name { font-size: clamp(3.1rem, 9vw, 6.75rem); line-height: .98; font-weight: 800; letter-spacing: -.045em; }
+      .hero-bonus { border-left: 2px solid var(--accent); padding-left: 1rem; font-size: .9rem; color: var(--text-secondary); }
+      .hero-note { display: flex; align-items: center; gap: .6rem; font-size: .75rem; font-weight: 500; color: var(--text-muted); }
+      .hero-note i { color: var(--accent); }
+
+      /* ============ 6. VISION STATEMENT ============ */
+      .manifesto-runway { position: relative; min-height: 140vh; }
+      .manifesto-sticky { position: sticky; top: 18vh; }
+      .manifesto-stage-card { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--header-bg); }
+      .manifesto-float { display: none !important; }
+      #manifesto-percent { display: none; }
+      .manifesto-word { display: inline-block; opacity: .2; margin-right: .22em; transition: opacity .25s, color .25s; }
+      .manifesto-word.lit { opacity: 1; }
+      .manifesto-word.lit-accent { opacity: 1; color: var(--accent); }
+
+      /* ============ 7. SKILLS ============ */
+      .icon-pedestal-3d { width: 52px; height: 52px; border-radius: .8rem; display: flex; align-items: center; justify-content: center; background: var(--surface-2); border: 1px solid var(--line); flex-shrink: 0; }
+      .software-card > div:first-child h3 + span { color: var(--text-muted); font-weight: 500; }
+      .software-card .plus-badge { background: none; border: 0; padding: 0; letter-spacing: .02em; text-transform: none; font-size: .75rem; }
+      .liquid-progress-track { width: 100%; height: 3px; border-radius: 999px; background: var(--line); overflow: hidden; }
+      .liquid-progress-fill { height: 100%; border-radius: 999px; background: var(--accent); transition: width .6s cubic-bezier(.22,1,.36,1); }
+      .skill-chip-3d { display: inline-flex; padding: .3rem .65rem; border-radius: .45rem; font-size: .72rem; font-weight: 500; color: var(--text-secondary); background: var(--surface-2); border: 1px solid var(--line); }
+      .plus-badge { display: inline-flex; align-items: center; gap: .4rem; padding: .3rem .7rem; border-radius: 999px; font-size: .68rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line); }
+      .icon-tile { background: var(--accent-soft); border: 1px solid var(--accent-line); color: var(--accent); }
+
+      /* ============ 8. STACK CARDS, TIMELINE, DEPTH RAIL ============ */
+      .stack-card { position: sticky; top: calc(84px + var(--card-index,0) * 14px); transform-origin: center top; will-change: transform, filter; }
+      @media (min-width: 1024px) { .stack-card { top: calc(104px + var(--card-index,0) * 20px); } }
+      .stack-step-pill { border: 1px solid var(--line); color: var(--text-muted); transition: color .2s, border-color .2s, background-color .2s; }
+      .stack-step-pill.active { color: var(--text-primary); border-color: var(--accent-line); background: var(--accent-soft); }
+      h3.sticky-resume-header { position: sticky; top: 69px; z-index: 20; background: var(--header-bg); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); padding: 1rem 0; justify-content: flex-start; }
+      .timeline-rail { position: relative; padding-left: 1.75rem; }
+      .timeline-rail::before { content: ""; position: absolute; left: .3rem; top: .5rem; bottom: .5rem; width: 1px; background: var(--line-strong); }
+      .timeline-item.liquid-glass { overflow: visible; box-shadow: none; }
+      .timeline-item::before { content: ""; position: absolute; left: -1.68rem; top: 1.75rem; width: 9px; height: 9px; border-radius: 50%; background: var(--bg-primary); border: 2px solid var(--accent); }
+      .timeline-item > div:first-child { display: none; }
+      .timeline-item > div:last-child { margin-left: 0 !important; }
+
+      .depth-indicator { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 40; }
+      #depth-percent, #depth-label { display: none; }
+      .depth-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--line-strong); transition: height .25s, background-color .25s; }
+      .depth-dot.active { height: 22px; background: var(--accent); }
+
+      /* ============ 9. FILTERS, PILLS, PORTFOLIO, ACHIEVEMENTS ============ */
+      .filter-pill-3d { background: transparent; border: 1px solid var(--line); color: var(--text-secondary); font-weight: 600; cursor: pointer; transition: color .2s, border-color .2s, background-color .2s; }
+      .filter-pill-3d:hover:not(.active) { border-color: var(--line-strong); color: var(--text-primary); }
+      .filter-pill-3d.active { background: var(--text-primary); border-color: var(--text-primary); color: var(--bg-primary); }
+      .role-pill { background: var(--surface-2); border: 1px solid var(--line); color: var(--text-secondary); }
+      .portfolio-item.liquid-glass { padding: .5rem; }
+      .portfolio-item .rounded-2xl { border-radius: .75rem; }
+      .portfolio-item h3 { font-size: .9rem; font-weight: 600; margin: .85rem .5rem .45rem; }
+
+      #achievements .grid { gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 1.125rem; overflow: hidden; }
+      #achievements .liquid-glass { border: 0; border-radius: 0; box-shadow: none; text-align: left; }
+      #achievements .liquid-glass > div:first-child { font-size: 1.25rem; }
+
+      @media (max-width: 639px) { #achievements .grid { grid-template-columns: 1fr 1fr; } #achievements .liquid-glass { padding: 1.35rem; } }
+
+      input, textarea { transition: border-color .2s, box-shadow .2s; }
+      #contact-form input:focus, #contact-form textarea:focus { border-color: var(--accent) !important; box-shadow: 0 0 0 3px var(--accent-soft); }
+      [data-theme="light"] #form-error-box { color: #991b1b; }
+
+      /* ============ 10. THEME BUTTON, POPUPS, SCROLLBAR ============ */
+      .theme-toggle-btn { width: 42px; height: 42px; border-radius: .65rem; border: 1px solid var(--line); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; color: var(--text-primary); }
+      .theme-toggle-btn:hover { border-color: var(--accent-line); color: var(--accent); }
+      .popup-overlay { position: fixed; inset: 0; background: rgba(4,5,7,.88); z-index: 9998; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .28s; padding: 1rem; }
+      .popup-overlay.visible { opacity: 1; }
+      .popup-overlay.hidden { display: none; }
+      .popup-content { position: relative; max-width: 920px; width: 100%; transform: scale(.97); transition: transform .28s; }
+      .popup-overlay.visible .popup-content { transform: scale(1); }
+      .popup-video-container { position: relative; padding-bottom: 56.25%; height: 0; }
+      .popup-video-container iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .popup-close-btn { position: absolute; top: -48px; right: 0; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.3); color: #fff; font-size: 1.4rem; line-height: 1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+      .popup-close-btn:hover { background: rgba(255,255,255,.22); }
+      ::-webkit-scrollbar { width: 9px; }
+      ::-webkit-scrollbar-track { background: var(--bg-primary); }
+      ::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 999px; }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
     </style>
   </head>
 
@@ -1235,23 +360,20 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center gap-3">
         <a
           href="#hero"
-          class="text-lg sm:text-2xl font-bold tracking-wider flex items-center gap-2 min-h-[44px]"
+          class="brand-mark text-base sm:text-lg flex items-center gap-2 min-h-[44px]"
           style="color: var(--text-primary)"
         >
-          <span
-            class="w-3 h-3 rounded-full inline-block flex-shrink-0"
-            style="background: var(--accent-gradient); box-shadow: 0 0 12px #38bdf8"
-          ></span>
+          <span class="w-2.5 h-2.5 inline-block flex-shrink-0 rotate-45" style="background: var(--accent)"></span>
           <span>HARDEEP <span class="text-sky-400">SAVANI</span></span>
         </a>
 
         <nav class="hidden lg:flex space-x-6 xl:space-x-7 items-center text-sm font-medium">
           <a href="#portfolios" class="hover:text-sky-400 transition py-2" style="color: var(--text-secondary)">Work</a>
           <a href="#about" class="hover:text-sky-400 transition py-2" style="color: var(--text-secondary)">About</a>
-          <a href="#plus-points" class="hover:text-sky-400 transition font-semibold text-sky-400 py-2">+ Plus Points</a>
+          <a href="#plus-points" class="transition py-2">+ Plus Points</a>
           <a href="#software-abilities" class="hover:text-sky-400 transition py-2" style="color: var(--text-secondary)">Software Abilities</a>
           <a href="#resume" class="hover:text-sky-400 transition py-2" style="color: var(--text-secondary)">Resume</a>
-          <a href="#contact" class="px-5 py-2.5 text-xs uppercase btn-3d btn-primary-3d">
+          <a href="#contact" class="px-5 py-2.5 btn-3d btn-primary-3d">
             Get in Touch
           </a>
         </nav>
@@ -1286,10 +408,10 @@
       >
         <a href="#portfolios" class="block py-3 text-sm font-medium hover:text-sky-400" style="color: var(--text-secondary)">Work</a>
         <a href="#about" class="block py-3 text-sm font-medium hover:text-sky-400" style="color: var(--text-secondary)">About</a>
-        <a href="#plus-points" class="block py-3 text-sm font-semibold text-sky-400">+ Plus Points</a>
+        <a href="#plus-points" class="block py-3 text-sm font-medium" style="color: var(--text-secondary)">+ Plus Points</a>
         <a href="#software-abilities" class="block py-3 text-sm font-medium hover:text-sky-400" style="color: var(--text-secondary)">Software Abilities</a>
         <a href="#resume" class="block py-3 text-sm font-medium hover:text-sky-400" style="color: var(--text-secondary)">Resume</a>
-        <a href="#contact" class="block mt-3 text-center px-5 py-3 text-xs uppercase btn-3d btn-primary-3d w-full">
+        <a href="#contact" class="block mt-3 text-center px-5 py-3 text-xs btn-3d btn-primary-3d w-full">
           Get in Touch
         </a>
       </div>
@@ -1300,69 +422,48 @@
          ========================================================= -->
     <section
       id="hero"
-      class="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-4 sm:px-6"
+      class="relative min-h-screen flex items-center pt-28 pb-10 px-4 sm:px-6"
     >
-      <!-- Subtle Floating Parallax Glass Badges on Desktop -->
-      <div
-        data-parallax-speed="-0.14"
-        class="hidden lg:flex items-center gap-2.5 liquid-glass px-4 py-2.5 text-xs font-semibold absolute top-28 left-8 xl:left-20 pointer-events-none"
-        style="color: var(--text-primary)"
-      >
-        <i class="fa-solid fa-cube text-sky-400"></i>
-        <span>Blender • Maya • 3Ds Max</span>
-      </div>
-
-      <div
-        data-parallax-speed="0.16"
-        class="hidden lg:flex items-center gap-2.5 liquid-glass px-4 py-2.5 text-xs font-semibold absolute bottom-32 right-8 xl:right-24 pointer-events-none"
-        style="color: var(--text-primary)"
-      >
-        <i class="fa-solid fa-bolt text-amber-400"></i>
-        <span>+ Tech Edge: Vibe Coder &amp; Dev</span>
-      </div>
-
-      <div class="max-w-4xl w-full text-center relative z-10">
-        <div class="liquid-glass tilt-card p-6 sm:p-11 md:p-14">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest mb-5 role-pill">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <div class="max-w-7xl w-full mx-auto relative z-10">
+        <div class="max-w-3xl">
+          <div class="hero-kicker mb-8">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
             Available for Freelance &amp; Full-Time
           </div>
 
-          <h5 class="text-base sm:text-xl font-medium mb-2" style="color: var(--text-secondary)">
+          <h5 class="text-base sm:text-lg font-medium mb-3" style="color: var(--text-muted)">
             Hi I'm
           </h5>
 
-          <h1
-            class="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight mb-4 tracking-tight"
-            style="color: var(--text-primary)"
-          >
-            Hardeep
-            <span
-              class="bg-clip-text text-transparent"
-              style="background-image: var(--primary-gradient)"
-            >
-              Savani
-            </span>
+          <h1 class="hero-name mb-6" style="color: var(--text-primary)">
+            Hardeep<br />
+            <span style="color: var(--accent)">Savani</span>
           </h1>
 
           <!-- Preserved Core Main Profile -->
-          <p
-            class="text-xl sm:text-2xl md:text-3xl font-bold mb-5"
-            style="color: var(--text-primary)"
-          >
-            3D, VFX &amp; CGI Artist 🪐
+          <p class="text-xl sm:text-3xl font-semibold mb-6" style="color: var(--text-primary)">
+            3D, VFX &amp; CGI Artist
           </p>
 
-          <!-- Bonus Edge Pill Strip (+ Points) -->
-          <div class="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm role-pill mb-7">
-            <span class="font-bold text-sky-400">+ Bonus Edge:</span>
-            <span style="color: var(--text-secondary)">
-              Vibe Coder • Android &amp; Web Dev • Networking &amp; Graphics
-            </span>
+          <!-- Bonus Edge (+ Points) -->
+          <p class="hero-bonus mb-9">
+            <span class="font-semibold" style="color: var(--text-primary)">+ Bonus Edge:</span>
+            Vibe Coder • Android &amp; Web Dev • Networking &amp; Graphics
+          </p>
+
+          <div class="flex flex-col sm:flex-row flex-wrap gap-3 mb-9">
+            <button id="showreel-btn" class="px-6 py-3.5 btn-3d btn-primary-3d">
+              <i class="fa-solid fa-play"></i>
+              <span>Watch Demo Showreel 2023</span>
+            </button>
+            <a href="https://discord.com/invite/4H7PjsrjsF" target="_blank" class="px-6 py-3.5 btn-3d btn-secondary-3d">
+              <i class="fa-brands fa-discord text-lg"></i>
+              <span>Join Community on Discord</span>
+            </a>
           </div>
 
           <!-- All 10 Preserved Social Links Upgraded to Tactile 3D Keycaps -->
-          <ul class="social-3d-wrap flex justify-center flex-wrap gap-3 sm:gap-3.5 mt-6">
+          <ul class="flex flex-wrap gap-2.5">
             <li>
               <a class="social-keycap brand-fb" href="https://www.facebook.com/hookstar1993" target="_blank" title="Facebook" aria-label="Facebook">
                 <i class="fa-brands fa-facebook-f"></i>
@@ -1415,35 +516,18 @@
             </li>
           </ul>
 
-          <!-- Tactile 3D Hero CTA Buttons -->
-          <div class="flex flex-wrap justify-center gap-4 mt-10">
-            <button
-              id="showreel-btn"
-              class="px-7 py-3.5 text-xs sm:text-sm uppercase btn-3d btn-secondary-3d flex items-center gap-2.5"
-            >
-              <i class="fa-brands fa-youtube text-lg"></i>
-              <span>WATCH DEMO SHOWREEL 2023</span>
-            </button>
-            <a
-              href="https://discord.com/invite/4H7PjsrjsF"
-              target="_blank"
-              class="px-7 py-3.5 text-xs sm:text-sm uppercase btn-3d btn-primary-3d flex items-center gap-2.5"
-            >
-              <i class="fa-brands fa-discord text-lg"></i>
-              <span>JOIN COMMUNITY ON DISCORD</span>
-            </a>
-          </div>
         </div>
 
-        <!-- Scroll Cue -->
-        <a
-          href="#manifesto"
-          class="inline-flex flex-col items-center mt-10 text-xs uppercase tracking-widest opacity-85 hover:opacity-100 transition"
-          style="color: var(--text-secondary)"
-        >
-          <span>Scroll to Experience 3D Stage</span>
-          <i class="fa-solid fa-chevron-down mt-2 animate-bounce text-sky-400"></i>
-        </a>
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mt-14 pt-6 border-t" style="border-color: var(--line)">
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-8">
+            <span class="hero-note"><i class="fa-solid fa-cube"></i>Blender • Maya • 3Ds Max</span>
+            <span class="hero-note"><i class="fa-solid fa-bolt"></i>+ Tech Edge: Vibe Coder &amp; Dev</span>
+          </div>
+          <a href="#manifesto" class="hero-note">
+            <span>Scroll to Experience 3D Stage</span>
+            <i class="fa-solid fa-arrow-down"></i>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -1497,12 +581,12 @@
           <!-- Main Pinned 3D Liquified Glass Stage -->
           <div
             id="manifesto-stage-card"
-            class="manifesto-stage-card liquid-glass p-6 sm:p-11 md:p-14 text-center relative z-10"
+            class="manifesto-stage-card px-2 py-12 md:py-16 text-center relative z-10"
           >
             <!-- Top Pill Badge + Live Progress % -->
             <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
               <span class="plus-badge px-4 py-1.5 text-[11px]">
-                ✦ SCROLL-SYNCED CREATIVE VISION
+                Scroll-Synced Creative Vision
               </span>
               <span
                 id="manifesto-percent"
@@ -1523,7 +607,7 @@
             </h2>
 
             <!-- Mobile Micro-Badge Row -->
-            <div class="flex md:hidden flex-wrap justify-center gap-2 mt-6">
+            <div class="flex flex-wrap justify-center gap-2 mt-8">
               <span class="role-pill px-3 py-1 rounded-full text-[11px] font-semibold">3D &amp; CGI</span>
               <span class="role-pill px-3 py-1 rounded-full text-[11px] font-semibold">VFX Pipeline</span>
               <span class="role-pill px-3 py-1 rounded-full text-[11px] font-semibold">+ Full-Stack Web</span>
@@ -1561,12 +645,12 @@
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 items-center">
             <!-- Profile Avatar -->
             <div class="lg:col-span-1 flex justify-center">
-              <div class="relative p-2 rounded-full" style="background: var(--primary-gradient); box-shadow: 0 18px 44px rgba(99, 102, 241, 0.4)">
+              <div class="relative p-2 rounded-full border" style="border-color: var(--accent-line)">
                 <img
                   src="assets/animatedpp.gif"
                   alt="Hardeep Savani"
-                  onerror="this.onerror=null; this.src='https://placehold.co/320x320/0f172a/38bdf8?text=HARDEEP+SAVANI';"
-                  class="w-48 h-48 sm:w-60 sm:h-60 rounded-full object-cover border-4 border-slate-950/70"
+                  onerror="this.onerror=null; this.src='https://placehold.co/320x320/181b21/f2a65a?text=HARDEEP+SAVANI';"
+                  class="w-48 h-48 sm:w-60 sm:h-60 rounded-full object-cover"
                 />
               </div>
             </div>
@@ -1641,8 +725,8 @@
               <div
                 class="mt-7 p-4 sm:p-5 rounded-2xl border text-left"
                 style="
-                  background: linear-gradient(135deg, rgba(56, 189, 248, 0.09), rgba(139, 92, 246, 0.11));
-                  border-color: rgba(56, 189, 248, 0.36);
+                  background: var(--surface-2);
+                  border-color: var(--line);
                 "
               >
                 <div class="flex flex-wrap items-center gap-2 mb-2">
@@ -1667,14 +751,14 @@
                 <a
                   href="https://bit.ly/hardeepsavani-cv"
                   target="_blank"
-                  class="px-6 py-3 text-xs sm:text-sm uppercase btn-3d btn-primary-3d flex items-center gap-2"
+                  class="px-6 py-3 text-xs sm:text-sm btn-3d btn-primary-3d flex items-center gap-2"
                 >
                   <i class="fa-solid fa-file-pdf"></i>
                   <span>Download Resume</span>
                 </a>
                 <button
                   id="portfolio-links-btn"
-                  class="px-6 py-3 text-xs sm:text-sm uppercase btn-3d btn-secondary-3d flex items-center gap-2"
+                  class="px-6 py-3 text-xs sm:text-sm btn-3d btn-secondary-3d flex items-center gap-2"
                 >
                   <i class="fa fa-play"></i>
                   <span>Work &amp; Portfolio</span>
@@ -1693,7 +777,7 @@
           <!-- Left Column: Pinned Split-Screen Header & Live Counter -->
           <div class="w-full lg:w-5/12 lg:sticky lg:top-28 text-center lg:text-left">
             <span class="plus-badge mb-4">
-              <i class="fa-solid fa-sparkles"></i> Bonus Capabilities
+              <i class="fa-solid fa-star"></i> Bonus Capabilities
             </span>
             <br />
             <h2 class="section-heading">Beyond 3D: + Plus Points</h2>
@@ -1745,7 +829,7 @@
               data-stack-index="0"
             >
               <div class="flex items-start justify-between gap-4 mb-5">
-                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl text-white shadow-lg flex-shrink-0" style="background: linear-gradient(135deg, #f59e0b, #ec4899)">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl icon-tile flex-shrink-0">
                   <i class="fa-solid fa-bolt"></i>
                 </div>
                 <span class="plus-badge"><i class="fa-solid fa-plus"></i> Plus Point 01</span>
@@ -1772,7 +856,7 @@
               data-stack-index="1"
             >
               <div class="flex items-start justify-between gap-4 mb-5">
-                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl text-white shadow-lg flex-shrink-0" style="background: linear-gradient(135deg, #10b981, #06b6d4)">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl icon-tile flex-shrink-0">
                   <i class="fa-brands fa-android"></i>
                 </div>
                 <span class="plus-badge"><i class="fa-solid fa-plus"></i> Plus Point 02</span>
@@ -1799,7 +883,7 @@
               data-stack-index="2"
             >
               <div class="flex items-start justify-between gap-4 mb-5">
-                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl text-white shadow-lg flex-shrink-0" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6)">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl icon-tile flex-shrink-0">
                   <i class="fa-solid fa-code"></i>
                 </div>
                 <span class="plus-badge"><i class="fa-solid fa-plus"></i> Plus Point 03</span>
@@ -1826,7 +910,7 @@
               data-stack-index="3"
             >
               <div class="flex items-start justify-between gap-4 mb-5">
-                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl text-white shadow-lg flex-shrink-0" style="background: linear-gradient(135deg, #0ea5e9, #14b8a6)">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl icon-tile flex-shrink-0">
                   <i class="fa-solid fa-network-wired"></i>
                 </div>
                 <span class="plus-badge"><i class="fa-solid fa-plus"></i> Plus Point 04</span>
@@ -1888,7 +972,7 @@
                     onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
                     class="w-9 h-9 object-contain"
                   />
-                  <i class="fa-solid fa-cube text-2xl text-orange-400 hidden"></i>
+                  <i class="fa-solid fa-cube text-2xl text-sky-400 hidden"></i>
                 </div>
                 <div>
                   <h3 class="text-lg font-bold leading-tight" style="color: var(--text-primary)">Blender</h3>
@@ -1922,7 +1006,7 @@
                     onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
                     class="w-9 h-9 object-contain"
                   />
-                  <i class="fa-solid fa-cubes text-2xl text-cyan-400 hidden"></i>
+                  <i class="fa-solid fa-cubes text-2xl text-sky-400 hidden"></i>
                 </div>
                 <div>
                   <h3 class="text-lg font-bold leading-tight" style="color: var(--text-primary)">Autodesk MAYA</h3>
@@ -1956,7 +1040,7 @@
                     onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
                     class="w-9 h-9 object-contain"
                   />
-                  <i class="fa-solid fa-layer-group text-2xl text-blue-400 hidden"></i>
+                  <i class="fa-solid fa-layer-group text-2xl text-sky-400 hidden"></i>
                 </div>
                 <div>
                   <h3 class="text-lg font-bold leading-tight" style="color: var(--text-primary)">3Ds MAX</h3>
@@ -1990,7 +1074,7 @@
                     onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
                     class="w-9 h-9 object-contain"
                   />
-                  <i class="fa-solid fa-paintbrush text-2xl text-lime-400 hidden"></i>
+                  <i class="fa-solid fa-paintbrush text-2xl text-sky-400 hidden"></i>
                 </div>
                 <div>
                   <h3 class="text-lg font-bold leading-tight" style="color: var(--text-primary)">Substance Painter</h3>
@@ -2023,7 +1107,7 @@
                     onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
                     class="w-9 h-9 object-contain"
                   />
-                  <i class="fa-solid fa-shirt text-2xl text-amber-400 hidden"></i>
+                  <i class="fa-solid fa-shirt text-2xl text-sky-400 hidden"></i>
                 </div>
                 <div>
                   <h3 class="text-lg font-bold leading-tight" style="color: var(--text-primary)">Marvelous Designer</h3>
@@ -2056,7 +1140,7 @@
                     onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
                     class="w-9 h-9 object-contain"
                   />
-                  <i class="fa-solid fa-diagram-project text-2xl text-orange-400 hidden"></i>
+                  <i class="fa-solid fa-diagram-project text-2xl text-sky-400 hidden"></i>
                 </div>
                 <div>
                   <h3 class="text-lg font-bold leading-tight" style="color: var(--text-primary)">Substance Designer</h3>
@@ -2119,7 +1203,7 @@
                     onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
                     class="w-9 h-9 object-contain"
                   />
-                  <i class="fa-solid fa-wand-magic-sparkles text-2xl text-violet-400 hidden"></i>
+                  <i class="fa-solid fa-wand-magic-sparkles text-2xl text-sky-400 hidden"></i>
                 </div>
                 <div>
                   <h3 class="text-lg font-bold leading-tight" style="color: var(--text-primary)">After Effects</h3>
@@ -2152,7 +1236,7 @@
                     onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
                     class="w-9 h-9 object-contain"
                   />
-                  <i class="fa-solid fa-film text-2xl text-fuchsia-400 hidden"></i>
+                  <i class="fa-solid fa-film text-2xl text-sky-400 hidden"></i>
                 </div>
                 <div>
                   <h3 class="text-lg font-bold leading-tight" style="color: var(--text-primary)">Premiere Pro</h3>
@@ -2628,7 +1712,7 @@
                   <button
                     type="submit"
                     id="form-submit-btn"
-                    class="px-8 py-3.5 text-xs sm:text-sm uppercase btn-3d btn-primary-3d w-full sm:w-auto"
+                    class="px-8 py-3.5 text-xs sm:text-sm btn-3d btn-primary-3d w-full sm:w-auto"
                   >
                     Send Message
                   </button>
@@ -2684,7 +1768,7 @@
 
               <div class="mt-8 p-5 rounded-2xl border" style="background: var(--pill-bg); border-color: var(--liquid-border)">
                 <p class="text-xs leading-relaxed" style="color: var(--text-secondary)">
-                  <i class="fa-solid fa-sparkles text-sky-400 mr-1.5"></i>
+                  <i class="fa-solid fa-star text-sky-400 mr-1.5"></i>
                   Quick response for 3D/VFX projects, game assets, mobile/web builds, and full-time studio opportunities.
                 </p>
               </div>
@@ -2706,7 +1790,7 @@
         </p>
         <button
           id="close-success-modal"
-          class="px-7 py-2.5 text-xs uppercase btn-3d btn-primary-3d"
+          class="px-7 py-2.5 text-xs btn-3d btn-primary-3d"
         >
           Close
         </button>
@@ -2716,9 +1800,9 @@
     <!-- =========================================================
          FOOTER (ALL 9 3D KEYCAP SOCIALS & EXACT COPYRIGHT PRESERVED)
          ========================================================= -->
-    <footer class="py-12 mt-12 border-t" style="border-color: var(--liquid-border)">
+    <footer class="relative py-12 mt-12 border-t" style="border-color: var(--line); background: var(--bg-primary)">
       <div class="max-w-7xl mx-auto px-6 text-center" style="color: var(--text-muted)">
-        <div class="social-3d-wrap flex justify-center flex-wrap gap-3 mb-7">
+        <div class="flex justify-center flex-wrap gap-2.5 mb-7">
           <a class="social-keycap brand-fb" href="https://www.facebook.com/hookstar1993" target="_blank" title="Facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
           <a class="social-keycap brand-tw" href="https://twitter.com/hookstar1993" target="_blank" title="Twitter" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
           <a class="social-keycap brand-ig" href="https://www.instagram.com/hookstar1993" target="_blank" title="Instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -2789,11 +1873,11 @@
           const ambientLight = new THREE.AmbientLight(0xffffff, 0.55);
           scene.add(ambientLight);
 
-          const keyLight = new THREE.PointLight(0x38bdf8, 2.4, 60);
+          const keyLight = new THREE.PointLight(0xffd9b0, 2.0, 60);
           keyLight.position.set(8, 10, 14);
           scene.add(keyLight);
 
-          const rimLight = new THREE.PointLight(0xec4899, 2.0, 60);
+          const rimLight = new THREE.PointLight(0xffffff, 0.8, 60);
           rimLight.position.set(-10, -8, 10);
           scene.add(rimLight);
 
@@ -2801,19 +1885,22 @@
           const coreGroup = new THREE.Group();
           scene.add(coreGroup);
 
-          const knotGeo = new THREE.TorusKnotGeometry(2.35, 0.62, 140, 24);
+          const knotGeo = new THREE.TorusKnotGeometry(2.35, 0.62, 120, 16);
           const knotMat = new THREE.MeshStandardMaterial({
-            color: 0x6366f1,
-            metalness: 0.82,
+            color: 0xf2a65a,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.5,
+            metalness: 0.4,
             roughness: 0.18,
-            emissive: 0x1e1b4b,
-            emissiveIntensity: 0.45,
+            emissive: 0x3a2208,
+            emissiveIntensity: 0.6,
           });
           const knotMesh = new THREE.Mesh(knotGeo, knotMat);
           coreGroup.add(knotMesh);
 
           const ringMat1 = new THREE.MeshBasicMaterial({
-            color: 0x38bdf8,
+            color: 0x8d93a1,
             wireframe: true,
             transparent: true,
             opacity: 0.25,
@@ -2826,7 +1913,7 @@
           coreGroup.add(orbitalRing1);
 
           const ringMat2 = new THREE.MeshBasicMaterial({
-            color: 0xec4899,
+            color: 0x8d93a1,
             wireframe: true,
             transparent: true,
             opacity: 0.2,
@@ -2847,10 +1934,10 @@
             new THREE.DodecahedronGeometry(0.8, 0),
           ];
           const polyMat = new THREE.MeshStandardMaterial({
-            color: 0x38bdf8,
+            color: 0x8d93a1,
             wireframe: true,
             transparent: true,
-            opacity: 0.32,
+            opacity: 0.18,
           });
 
           const floaters = [];
@@ -2888,7 +1975,7 @@
             new THREE.BufferAttribute(nodePositions, 3)
           );
           const particleMat = new THREE.PointsMaterial({
-            color: 0x38bdf8,
+            color: 0x8d93a1,
             size: 0.13,
             transparent: true,
             opacity: 0.65,
@@ -2921,7 +2008,7 @@
             new THREE.Float32BufferAttribute(lineCoords, 3)
           );
           const lineMat = new THREE.LineBasicMaterial({
-            color: 0x6366f1,
+            color: 0x8d93a1,
             transparent: true,
             opacity: 0.14,
           });
@@ -2945,23 +2032,15 @@
 
           // Theme sync for Three.js materials
           function applyThreeTheme(theme) {
-            if (theme === "light") {
-              knotMat.color.setHex(0x2563eb);
-              knotMat.emissive.setHex(0xbfdbfe);
-              knotMat.emissiveIntensity = 0.25;
-              ringMat1.opacity = 0.22;
-              ringMat2.opacity = 0.18;
-              particleMat.opacity = 0.45;
-              lineMat.opacity = 0.12;
-            } else {
-              knotMat.color.setHex(0x6366f1);
-              knotMat.emissive.setHex(0x1e1b4b);
-              knotMat.emissiveIntensity = 0.45;
-              ringMat1.opacity = 0.26;
-              ringMat2.opacity = 0.2;
-              particleMat.opacity = 0.68;
-              lineMat.opacity = 0.15;
-            }
+            const light = theme === "light";
+            knotMat.color.setHex(light ? 0xa9540c : 0xf2a65a);
+            knotMat.emissive.setHex(light ? 0x7a3d08 : 0x3a2208);
+            knotMat.opacity = light ? 0.4 : 0.5;
+            ringMat1.opacity = 0.16;
+            ringMat2.opacity = 0.12;
+            polyMat && (polyMat.opacity = 0.18);
+            particleMat.opacity = light ? 0.4 : 0.45;
+            lineMat.opacity = 0.08;
           }
 
           applyThreeTheme(document.body.getAttribute("data-theme") || "dark");
@@ -2976,7 +2055,6 @@
 
           // Smooth Animation Loop driven by Scroll Progress + Time
           const clock = new THREE.Clock();
-          const hueColor = new THREE.Color();
 
           function animate() {
             requestAnimationFrame(animate);
@@ -2998,17 +2076,14 @@
             camera.lookAt(0, -scrollRatio * 2.5, camera.position.z - 14);
 
             // Rotate focal TorusKnot & orbital rings
-            coreGroup.position.x = Math.sin(scrollRatio * Math.PI * 2) * 3.2;
+            const wide = window.innerWidth >= 1024;
+            coreGroup.position.x = (wide ? 5.6 : 2.2) + Math.sin(scrollRatio * Math.PI * 2) * 2.4;
             coreGroup.position.y = -scrollRatio * 2.2;
             coreGroup.position.z = -scrollRatio * 14;
             knotMesh.rotation.x = t * 0.22 + scrollRatio * 4.2;
             knotMesh.rotation.y = t * 0.3 + scrollRatio * 3.1;
             orbitalRing1.rotation.z = t * 0.28 + scrollRatio * 2.5;
             orbitalRing2.rotation.z = -t * 0.22 - scrollRatio * 2.0;
-
-            // Shift light hue smoothly across sections
-            hueColor.setHSL((0.56 + scrollRatio * 0.32) % 1, 0.85, 0.6);
-            keyLight.color.copy(hueColor);
 
             // Animate midground polyhedra
             floaters.forEach((f) => {
@@ -3194,6 +2269,7 @@
           const ratio = Math.min(1, Math.max(0, window.scrollY / maxScroll));
           const pct = Math.round(ratio * 100);
 
+          document.body.classList.toggle("past-hero", window.scrollY > window.innerHeight * 0.6);
           if (progressBar) progressBar.style.width = `${pct}%`;
           if (depthPercent) depthPercent.textContent = `${pct}%`;
 
@@ -3222,44 +2298,6 @@
 
         window.addEventListener("scroll", onScroll, { passive: true });
         onScroll();
-      }
-
-      /**
-       * 5. 3D PERSPECTIVE MOUSE TILT & SPOTLIGHT (DESKTOP POINTERS ONLY)
-       */
-      function initLiquidTiltCards() {
-        const supportsHover = window.matchMedia(
-          "(hover: hover) and (pointer: fine)"
-        ).matches;
-        if (!supportsHover) return;
-
-        document.querySelectorAll(".liquid-glass").forEach((card) => {
-          card.addEventListener("mousemove", (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            card.style.setProperty("--mouse-x", `${x}px`);
-            card.style.setProperty("--mouse-y", `${y}px`);
-
-            if (card.classList.contains("tilt-card") && window.innerWidth >= 1024) {
-              const centerX = rect.width / 2;
-              const centerY = rect.height / 2;
-              const rotateX = ((y - centerY) / centerY) * -4.5;
-              const rotateY = ((x - centerX) / centerX) * 4.5;
-              card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(
-                2
-              )}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
-            }
-          });
-
-          card.addEventListener("mouseleave", () => {
-            if (card.classList.contains("tilt-card")) {
-              card.style.transform =
-                "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)";
-            }
-          });
-        });
       }
 
       /**
@@ -3312,7 +2350,6 @@
 
       document.addEventListener("DOMContentLoaded", () => {
         initThemeToggle();
-        initLiquidTiltCards();
         initScrollChrome();
         initManifestoScrub();
         initStickyStackCards();
@@ -3751,7 +2788,7 @@
             const card = document.createElement("div");
             card.className = `portfolio-item liquid-glass p-4 ${item.category}`;
 
-            const fallbackPlaceholder = `https://placehold.co/640x360/0f172a/38bdf8?text=${encodeURIComponent(
+            const fallbackPlaceholder = `https://placehold.co/640x360/181b21/f2a65a?text=${encodeURIComponent(
               item.title
             )}`;
 
@@ -3875,14 +2912,14 @@
                   <a
                     href="https://www.playbook.com/s/hookstarfx/works"
                     target="_blank"
-                    class="px-6 py-3 text-xs sm:text-sm uppercase btn-3d btn-primary-3d flex items-center justify-center gap-2"
+                    class="px-6 py-3 text-xs sm:text-sm btn-3d btn-primary-3d flex items-center justify-center gap-2"
                   >
                     <i class="fa-solid fa-book-open"></i><span>View PlayBook</span>
                   </a>
                   <a
                     href="https://www.artstation.com/hookstar1993"
                     target="_blank"
-                    class="px-6 py-3 text-xs sm:text-sm uppercase btn-3d btn-secondary-3d flex items-center justify-center gap-2"
+                    class="px-6 py-3 text-xs sm:text-sm btn-3d btn-secondary-3d flex items-center justify-center gap-2"
                   >
                     <i class="fa-brands fa-artstation"></i><span>Visit ArtStation</span>
                   </a>
@@ -3901,7 +2938,7 @@
           const imageSrc = lightboxLink.getAttribute("href");
           const fallbackSrc =
             lightboxLink.getAttribute("data-fallback") ||
-            "https://placehold.co/960x540/0f172a/38bdf8?text=3D+Artwork";
+            "https://placehold.co/960x540/181b21/f2a65a?text=3D+Artwork";
 
           showPopup(`
             <div class="liquid-glass p-3 text-center">
